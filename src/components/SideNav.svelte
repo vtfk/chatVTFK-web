@@ -12,7 +12,7 @@
             <p style="padding: 0px;"><strong>TEST</strong></p>
         {/if} -->
     </div>
-    <!-- <div class="sideNavItemsContainer">
+    <div class="sideNavItemsContainer">
         <div class="sideNavFlexHelper">
             <div class="sideNavItem">
                 <a href="/authenticated">
@@ -23,14 +23,17 @@
                 </a>
             </div>
             <div class="sideNavItem">
-                <a href="/authenticated/feide">
+                <a href="/authenticated/chatVTFK">
                     <div class="icon">
                         🤓
                     </div>
-                    <p>Feid2kator</p>
+                    <p>Chat</p>
                 </a>
             </div>
-            <div class="sideNavItem">
+        </div>
+    </div>
+            
+         <!--   <div class="sideNavItem">
                 <a href="/authenticated/azure">
                     <div class="icon">
                         👻
