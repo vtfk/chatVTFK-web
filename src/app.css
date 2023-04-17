@@ -1,0 +1,360 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,700&display=swap');
+
+body {
+    margin: 0;
+    font-family: 'Nunito Sans', Lato, 'Trebuchet MS', sans-serif;
+    color: #1D1C28;
+    padding: 0;
+    min-width: 100%;
+}
+
+* {
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    image-rendering: -webkit-optimize-contrast;
+    -webkit-tap-highlight-color:  rgba(255, 255, 255, 0);
+    padding: 0;
+    margin: 0;
+}
+
+select {
+  width: 100%;
+  padding: 5px 5px;
+  border: 1px solid var(--mork);
+  border-radius: 0.5rem;
+  box-sizing: border-box;
+}
+
+.centerSpinner {
+  display: flex;
+  justify-content: space-around;
+  margin: 1rem;
+}
+
+:root {
+    line-height: 24px;
+    font-weight: 400;
+
+    color-scheme: light only;
+    color: rgba(255, 255, 255, 0.87);
+    
+    /* units */
+    --baseUnit: 8px;
+
+    /* layout */
+    --sidenavWidth: 160px;
+
+    /* colors */
+    --red: #E40017;
+    --white: var(--whiteTone);
+    --gin: #EAF3EF;
+    --swansDown: #D4E6DC;
+    --pixieGreen: #BFDCB2;
+    --springWood: #F8F6F0;
+    --lightBlue: #AEDCEA;
+    --potPourri: #F7E5E2;
+    --peppermint: #DAE8D0;
+    --deepSeaGreen: #005260;
+    --catSkillWhite: #EBF6F9;
+    --ecruWhite: #F6F5E4;
+    --hummingBird: #D2EFF6;
+    --onahau: #BDE7F1;
+    --grannyApple: #C9E6C2;
+    --zanah: #DAEED5;
+    --hawkesBlue: #D5DDEE;
+    --iceCold: #B2DCDA;
+
+    /* secondary colors */
+    --luft-1: #B2DCDA;
+    --luft-2: #D3EAE9;
+    --luft-3: #7DBEBA;
+    --korn-1: #E6E3BB;
+    --korn-2: #F0EED8;
+    --korn-3: #CFC98B;
+    --dugg-1: #BEDACA;
+    --dugg-2: #D9E9E0;
+    --dugg-3: #8DB9A0;
+    --varme-1: #E8D1C1;
+    --varme-2: #F1E4DB;
+    --varme-3: #D1AB94;
+    --berg-1: #D4D5CE;
+    --berg-2: #E6E6E2;
+    --berg-3: #B0B2A5;
+    --nype-1: #F6B6B3;
+    --nype-2: #FAD5D3;
+    --nype-3: #EB8380;
+    --roslyng-1: #D2B9C8;
+    --roslyng-2: #ECE2E8;
+    --roslyng-3: #AD879E;
+    --sand-1: #EBE6D6;
+    --sand-2: #F3F0E7;
+    --sand-3: #D9CFB4;
+    --siv-1: #F0E1BD;
+    --siv-2: #F6EDD9;
+    --siv-3: #E0C58E;
+    --himmel-1: #AEDCEA;
+    --himmel-2: #D1EAF3;
+    --himmel-3: #7ABED3;
+    --lavendel-1: #BBC7E0;
+    --lavendel-2: #D8DEED;
+    --lavendel-3: #8A9CC4;
+    --gress-1: #C0DCB2;
+    --gress-2: #DBEAD3;
+    --gress-3: #90BC7F;
+    --stein-1: #B9CDD4;
+    --stein-2: #D7E2E6;
+    --stein-3: #87A5AF;
+    --noytral-1: #E3E3E3;
+    --noytral-2: #EEEEEE;
+    --noytral-3: #CACACA;
+    --whiteTone: #FFFFFF;
+    --mork: #A3A3A3;
+    --greyTone: rgb(215, 215, 215);
+    --lightGrey: #ebebeb;
+}
+
+/* Typography */
+
+p {
+  font-size: 16px;
+  line-height: 24px;
+  min-height: 24px;
+}
+
+p.small {
+  font-size: 14px;
+  line-height: 24px;
+  min-height: 24px;
+}
+
+.error {
+  color: var(--red);
+  font-weight: bold;
+}
+
+a, a:visited {
+  color: #005260;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+  color: #005260;
+}
+
+.link {
+  color: #005260;
+  cursor: pointer;
+}
+.link:hover {
+  text-decoration: underline;
+  color: #005260;
+}
+.link-noColor {
+  cursor: pointer;
+}
+.link-noColor:hover {
+  text-decoration: underline;
+}
+
+.link2 {
+  font-size: 16px;
+  line-height: 24px;
+  min-height: 24px;
+  color: inherit;
+  cursor: pointer;
+}
+
+.link2.no-style {
+  text-decoration: none;
+}
+
+.link2.small {
+  font-size: 14px;
+  line-height: 24px;
+  min-height: 24px;
+}
+
+.link2.has-icon .link-icon {
+    display: inline-block;
+    transition: all 200ms ease-in-out;
+}
+
+.link2.has-icon .link-icon.left-icon {
+  margin-right: calc(var(--baseUnit) * 2);
+}
+
+.link2.has-icon .link-icon.right-icon {
+  margin-left: calc(var(--baseUnit) * 2);
+}
+
+.link2.has-icon:hover {
+  text-decoration: none;
+}
+
+.link2.has-icon:hover .link-icon.left-icon {
+  transform: translateX(-4px);
+}
+
+.link2.has-icon:hover .link-icon.right-icon {
+  transform: translateX(4px);
+}
+
+.link2:hover {
+  text-decoration: underline;
+}
+
+h1 {
+  font-size: 48px;
+  line-height: 66px;
+  min-height: 66px;
+  font-weight: 700;
+}
+
+.header2kator {
+  padding-bottom: 1rem;
+}
+
+.content2kator {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+@media(max-width: 885px) {
+  h1 {
+    font-size: 36px;
+    line-height: 49px;
+    min-height: 49px;
+  }
+}
+
+h2 {
+  font-size: 36px;
+  line-height: 40px;
+  min-height: 40px;
+  font-weight: 400;
+}
+
+@media(max-width: 885px) {
+  h2 {
+    font-size: 28px;
+    line-height: 38px;
+    min-height: 38px;
+  }
+}
+
+h3 {
+  font-size: 21px;
+  line-height: 28px;
+  min-height: 28px;
+  font-weight: 400;
+}
+
+@media(max-width: 885px) {
+  h3 {
+    font-size: 18px;
+    line-height: 24px;
+    min-height: 24px;
+  }
+}
+
+h4 {
+  font-size: 16px;
+  line-height: 25px;
+  min-height: 25px;
+  font-weight: 700;
+}
+
+.visually-hidden {
+  position: absolute;
+  overflow: hidden;
+  clip: rect(1px,1px,1px,1px);
+  width: 1px;
+  height: 1px;
+}
+
+.visually-hidden.focusable:active, .visually-hidden.focusable:focus {
+  position: inherit;
+  overflow: visible;
+  clip: auto;
+  width: auto;
+  height: auto;
+}
+
+input, select, textarea, button {
+  font-family:inherit;
+  font-size: inherit;
+}
+
+/* End typography */
+
+.skip-link {
+  position: fixed !important;
+  z-index: 999999 !important;
+  display: block;
+  top: 0;
+  left: 0;
+  right: 0;
+
+  padding: 8px;
+  text-align: center;
+  background: var(--pixieGreen);
+}
+
+input[type=text] {
+  height: 2rem;
+  width: 100%;
+  padding: 5px 5px;
+  border: 1px solid var(--mork);
+  border-radius: 0.5rem;
+  box-sizing: border-box;
+}
+input[type=number] {
+  height: 2rem;
+  width: 100%;
+  padding: 5px 5px;
+  border: 1px solid var(--mork);
+  border-radius: 0.5rem;
+  box-sizing: border-box;
+}
+
+.checkboxContainer {
+  padding: 0.6rem 0 0.3rem 0;
+  align-items: center;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.validation {
+  color: var(--red)
+}
+
+input[type=checkbox], input[type=radio] {
+  height: 1.2rem;
+  width: 1.2rem;
+}
+
+input.required {
+  outline: none !important;
+  border: 2px solid var(--red) !important;
+}
+
+.centerSpinner {
+  display: flex;
+  justify-content: space-around;
+  margin: 1rem;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}

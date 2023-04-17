@@ -1,0 +1,123 @@
+<script>
+    import Logo from './Icons/Logo.svelte'
+</script>
+
+<div class=container>
+    <div class="logoContainer">
+        <Logo />
+    </div>
+    <div style="text-align: center; width: 100%;">
+        <p style="padding: 0px;"><strong>ChatVTFK</strong></p>
+        <!-- {#if environment === 'test'}
+            <p style="padding: 0px;"><strong>TEST</strong></p>
+        {/if} -->
+    </div>
+    <!-- <div class="sideNavItemsContainer">
+        <div class="sideNavFlexHelper">
+            <div class="sideNavItem">
+                <a href="/authenticated">
+                    <div class="icon">
+                        🏡
+                    </div>
+                    <p>Hjem</p>
+                </a>
+            </div>
+            <div class="sideNavItem">
+                <a href="/authenticated/feide">
+                    <div class="icon">
+                        🤓
+                    </div>
+                    <p>Feid2kator</p>
+                </a>
+            </div>
+            <div class="sideNavItem">
+                <a href="/authenticated/azure">
+                    <div class="icon">
+                        👻
+                    </div>
+                    <p>Azure MFA</p>
+                </a>
+            </div>
+            <div class="sideNavItem">
+                <a href="/authenticated/chucky">
+                    <div class="icon">
+                        💪
+                    </div>
+                    <p>Chucky</p>
+                </a>
+            </div>
+        </div>
+    </div> -->
+</div>
+
+<style>
+    .container {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+    .logoContainer {
+        margin: 0px auto;
+        padding-top: 36px;
+        width: 3.5rem;
+    }
+    .sideNavItemsContainer {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 0px;
+        margin-bottom: 150px;
+        width: 100%;
+        text-align: center;
+    }
+
+    .sideNavFlexHelper {
+        width: 100%;
+    }
+
+    .sideNavItem {
+        width: 100%;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .siteNavItemActive, .sideNavItem:hover {
+        background: #dcac89;
+    }
+
+    .sideNavItem:hover {
+        cursor: pointer;
+    }
+
+    .icon {
+        color: #000000;
+        width: 2rem;
+        height: 2rem;
+        margin: 1rem;
+        margin-bottom: -1rem;
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+    }
+
+    button {
+        all:unset;
+        width: 100%;
+    }
+
+    button:active {
+        outline: #dcac89 auto;
+        width: 100%;
+        height: 100%;
+    }
+
+    p {
+        padding: 1.25rem 0.5rem;
+        text-decoration: none;
+        font-size: 16px;
+        color: #000000;
+        display: block;
+    }
+</style>
