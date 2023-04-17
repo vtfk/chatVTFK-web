@@ -63,7 +63,7 @@
 		})
 
         const test = await token(inputMessage)
-  
+
         // let response = await axios.post('/api/chat', body, {headers: {'Content-Type': 'application/json'}})
         if(firstRun !== true) {
             response = await axios.post(`${api.local.url}/Response`, body, {headers: {'Content-Type': 'application/json', Authorization: `${accessToken.secret}`}})
@@ -108,64 +108,58 @@
 
 </script>
 <main>
-    {#await test()}
-        <div class="centerSpinner">
-            <IconSpinner/>
-        </div>
-    {:then} 
-        <!-- Header infobox button and infobox -->
-        <div class="pageIntro">
-            <h2 style="margin-bottom: 1rem;">Velkommen til ChatVTFK </h2>
-            <!-- svelte-ignore a11y-click-events-have-key-events -->
-            <div class="headerIcon" title={showInfoBox ? 'Lukk infoboks' : 'Åpne infoboks'} on:click={() => {showInfoBox = !showInfoBox}}><IconHelp /></div>
-            <InfoBox content={'Her kan brukeren få litt info om chatvtfk. NB! Dette er en POC'} html={true} open={showInfoBox} onClose={() => {showInfoBox = !showInfoBox}} />
-        </div>
-        <!-- Chatwindow -->
-        <div bind:this={element} class="container">
-            {#await handleChatCompletion()}
-                <MessageBox role={'assistant'} message={'...'} />
-            {:then} 
-                {#if inputMessage.length > 0 && isEnterPressed === true}
-                    {#each messages as message}
-                        {#if message.role === 'user'}
-                            <MessageBox role={message.role} message={message.content} />
-                        {:else if message.role === 'assistant'}
-                            <MessageBox role={message.role} message={message.content} />
-                        {/if}
-                    {/each}
-                    <MessageBox role={'user'} message={inputMessage} />
-                    <MessageBox role={'assistant'} message={'...'} />
-                {:else}
-                    {#if isEnterPressed === false}
-                        {#each messages as message}
-                            <MessageBox role={message.role} message={message.content} />
-                        {/each}
+    <!-- Header infobox button and infobox -->
+    <div class="pageIntro">
+        <h2 style="margin-bottom: 1rem;">Velkommen til ChatVTFK </h2>
+        <!-- svelte-ignore a11y-click-events-have-key-events -->
+        <div class="headerIcon" title={showInfoBox ? 'Lukk infoboks' : 'Åpne infoboks'} on:click={() => {showInfoBox = !showInfoBox}}><IconHelp /></div>
+        <InfoBox content={'Her kan brukeren få litt info om chatvtfk. NB! Dette er en POC'} html={true} open={showInfoBox} onClose={() => {showInfoBox = !showInfoBox}} />
+    </div>
+    <!-- Chatwindow -->
+    <div bind:this={element} class="container">
+        {#await handleChatCompletion()}
+            <MessageBox role={'assistant'} message={'...'} />
+        {:then} 
+            {#if inputMessage.length > 0 && isEnterPressed === true}
+                {#each messages as message}
+                    {#if message.role === 'user'}
+                        <MessageBox role={message.role} message={message.content} />
+                    {:else if message.role === 'assistant'}
+                        <MessageBox role={message.role} message={message.content} />
                     {/if}
+                {/each}
+                <MessageBox role={'user'} message={inputMessage} />
+                <MessageBox role={'assistant'} message={'...'} />
+            {:else}
+                {#if isEnterPressed === false}
+                    {#each messages as message}
+                        <MessageBox role={message.role} message={message.content} />
+                    {/each}
                 {/if}
-            {/await}
-        </div>
-        
+            {/if}
+        {/await}
+    </div>
+    
 
-        <!-- Input field and send button -->
-        <div class="inputWrapper">
-            <input
-                bind:value={inputMessage}
-                on:keypress={onKeyPress}
-                type="text"
-                name="search"
-                id="search"
-                class={firstRun === true ? "displayNone" : "inputStyle"}
-            />
-            <button
-                on:click={handleChatCompletion}
-                type="submit"
-                id="searchButton"
-                class={firstRun === true ? "displayNone" : "buttonStyle"}
-            >
-                <Send></Send>
-            </button>
-        </div>
-    {/await}
+    <!-- Input field and send button -->
+    <div class="inputWrapper">
+        <input
+            bind:value={inputMessage}
+            on:keypress={onKeyPress}
+            type="text"
+            name="search"
+            id="search"
+            class={firstRun === true ? "displayNone" : "inputStyle"}
+        />
+        <button
+            on:click={handleChatCompletion}
+            type="submit"
+            id="searchButton"
+            class={firstRun === true ? "displayNone" : "buttonStyle"}
+        >
+            <Send></Send>
+        </button>
+    </div>
     
 </main>
 
