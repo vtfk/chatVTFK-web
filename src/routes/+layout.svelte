@@ -12,9 +12,9 @@
     
     const user = get(userStore)
     console.log('Jeg kom hit i vercel')
-    if(browser && window.location.pathname === '/') {
-        window.location.href = `${web.url}/authenticated/chatVTFK`
-    }
+    // if(browser && window.location.pathname === '/') {
+    //     window.location.href = `${web.url}/authenticated/chatVTFK`
+    // }
 
     const loginHandler = async () => {
         if(!get(userStore)) {
@@ -43,7 +43,8 @@
             console.log(error)
         } finally { 
             // If token is valid
-            if(msal !== null && msal.expiresOn > Date.now() / 1000) {
+            // if(msal !== null && msal.expiresOn > Date.now() / 1000) {
+            if(msal !== null) {
                 goto(`${web.url}/authenticated/chatVTFK`)
                 // if($navigating.to.url.pathname === 'http://localhost:5173/authenticated/chatVTFK') {
                 //     goto('http://localhost:5173/authenticated/chatVTFK')
