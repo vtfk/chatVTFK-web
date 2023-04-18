@@ -1,121 +1,122 @@
 <script>
-    import { onMount } from 'svelte';
+    // import { onMount } from 'svelte';
 	
-	import Send from '../../../components/Icons/Send.svelte';
-	import InfoBox from '../../../components/InfoBox.svelte';
-	import IconHelp from '../../../components/Icons/IconHelp.svelte';
-    import { tick } from 'svelte';
-    import axios from 'axios'
-	import { token } from '../../../lib/services/tiktoken.js'
-	import MessageBox from '../../../components/MessageBox.svelte';
-    import { api } from '../../../../config';
-	import { accesstokenStore } from '$lib/services/store';
-	import { get } from 'svelte/store';
+	// import Send from '../../../components/Icons/Send.svelte';
+	// import InfoBox from '../../../components/InfoBox.svelte';
+	// import IconHelp from '../../../components/Icons/IconHelp.svelte';
+    // import { tick } from 'svelte';
+    // import axios from 'axios'
+	// import { token } from '../../../lib/services/tiktoken.js'
+	// import MessageBox from '../../../components/MessageBox.svelte';
+    // import { api } from '../../../../config';
+	// import { accesstokenStore } from '$lib/services/store';
+	// import { get } from 'svelte/store';
 
-	let messages = [] 
-	let inputMessage = '';
-	let isEnterPressed = false
-    let showInfoBox = false
-    let element
-    let firstRun = false
-    let response
-    let accessToken
+	// let messages = [] 
+	// let inputMessage = '';
+	// let isEnterPressed = false
+    // let showInfoBox = false
+    // let element
+    // let firstRun = false
+    // let response
+    // let accessToken
     
-    const initialMessage = {
-		role: 'system',
-		content: 'Skriv en kort introduksjon og kort om hva du kan brukes til. Du heter ChatVTFK'
-    }
+    // const initialMessage = {
+	// 	role: 'system',
+	// 	content: 'Skriv en kort introduksjon og kort om hva du kan brukes til. Du heter ChatVTFK'
+    // }
 
-    console.log('Jeg kom hit i vercel6')
+    // console.log('Jeg kom hit i vercel6')
 
-    onMount (async () => {
-        console.log('Jeg kom hit i vercel7')
-        // accessToken = get(accesstokenStore)
-        // response = await axios.post(`${api.local.url}/Response`, initialMessage, {headers: {'Content-Type': 'application/json', Authorization: `${accessToken.secret}`, 'Access-Control-Allow-Origin': '*'}})
-        firstRun = true
-        console.log('Jeg kom hit i vercel8')
-    })
+    // onMount (async () => {
+    //     console.log('Jeg kom hit i vercel7')
+    //     // accessToken = get(accesstokenStore)
+    //     // response = await axios.post(`${api.local.url}/Response`, initialMessage, {headers: {'Content-Type': 'application/json', Authorization: `${accessToken.secret}`, 'Access-Control-Allow-Origin': '*'}})
+    //     firstRun = true
+    //     console.log('Jeg kom hit i vercel8')
+    // })
 
-    const handleChatCompletion = async () => {
-        // if(document.getElementById('search') !== null) {
-        //     document.getElementById('search').disabled = true
-        // }
+    // const handleChatCompletion = async () => {
+    //     // if(document.getElementById('search') !== null) {
+    //     //     document.getElementById('search').disabled = true
+    //     // }
 
-        // if(document.getElementById('searchButton') !== null) {
-        //     document.getElementById('searchButton').disabled = true
-        // }
+    //     // if(document.getElementById('searchButton') !== null) {
+    //     //     document.getElementById('searchButton').disabled = true
+    //     // }
         
-		const userMessage = {
-			role: 'user',
-			content: inputMessage
-		}
+	// 	const userMessage = {
+	// 		role: 'user',
+	// 		content: inputMessage
+	// 	}
 
-        // Clear input
-        // if(document.getElementById('search') !== null) {
-        //     document.getElementById('search').value = ''
-        // }
+    //     // Clear input
+    //     // if(document.getElementById('search') !== null) {
+    //     //     document.getElementById('search').value = ''
+    //     // }
 
-        const body = JSON.stringify({
-				isInitializing: messages.length === 0,
-				priorMessages: messages,
-				message: inputMessage
-		})
+    //     const body = JSON.stringify({
+	// 			isInitializing: messages.length === 0,
+	// 			priorMessages: messages,
+	// 			message: inputMessage
+	// 	})
 
-        const test = await token(inputMessage)
+    //     const test = await token(inputMessage)
 
-        // let response = await axios.post('/api/chat', body, {headers: {'Content-Type': 'application/json'}})
-        if(firstRun !== true) {
-            // response = await axios.post(`${api.local.url}/Response`, body, {headers: {'Content-Type': 'application/json', Authorization: `${accessToken.secret}`, 'Access-Control-Allow-Origin': '*'}})
-        } else {
+    //     // let response = await axios.post('/api/chat', body, {headers: {'Content-Type': 'application/json'}})
+    //     if(firstRun !== true) {
+    //         // response = await axios.post(`${api.local.url}/Response`, body, {headers: {'Content-Type': 'application/json', Authorization: `${accessToken.secret}`, 'Access-Control-Allow-Origin': '*'}})
+    //     } else {
             
-        }
+    //     }
 		
-        if (inputMessage) {
-			messages = messages.concat([userMessage])
-		}
+    //     if (inputMessage) {
+	// 		messages = messages.concat([userMessage])
+	// 	}
 
-		messages = messages.concat(response.data)
+	// 	messages = messages.concat(response.data)
 
-        // Clean up
-		inputMessage = ''
-        isEnterPressed = false
-        // if(document.getElementById('search') !== null) {
-        //     document.getElementById('search').disabled = false
-        //     document.getElementById('search').focus()
-        // }
-        // if(document.getElementById('search') !== null) {
-        //     document.getElementById('searchButton').disabled = false
-        // }
-        await tick()
-        scrollToBottom(element)
-        firstRun = false
-		return response
-	}
+    //     // Clean up
+	// 	inputMessage = ''
+    //     isEnterPressed = false
+    //     // if(document.getElementById('search') !== null) {
+    //     //     document.getElementById('search').disabled = false
+    //     //     document.getElementById('search').focus()
+    //     // }
+    //     // if(document.getElementById('search') !== null) {
+    //     //     document.getElementById('searchButton').disabled = false
+    //     // }
+    //     await tick()
+    //     scrollToBottom(element)
+    //     firstRun = false
+	// 	return response
+	// }
 
-    const onKeyPress = async e => {
-        if (e.charCode === 13) {
-            isEnterPressed = true
-            await tick()
-            scrollToBottom(element)
-            handleChatCompletion()
-        }
-    }
+    // const onKeyPress = async e => {
+    //     if (e.charCode === 13) {
+    //         isEnterPressed = true
+    //         await tick()
+    //         scrollToBottom(element)
+    //         handleChatCompletion()
+    //     }
+    // }
 
-    const scrollToBottom = async (node) => {
-        node.scroll({ top: node.scrollHeight * 2, behavior: 'smooth' })
-    }
+    // const scrollToBottom = async (node) => {
+    //     node.scroll({ top: node.scrollHeight * 2, behavior: 'smooth' })
+    // }
 
 </script>
 <main>
+    <p>Oi, noe er galt</p>
     <!-- Header infobox button and infobox -->
-    <div class="pageIntro">
-        <h2 style="margin-bottom: 1rem;">Velkommen til ChatVTFK </h2>
+    <!-- <div class="pageIntro">
+        <h2 style="margin-bottom: 1rem;">Velkommen til ChatVTFK </h2> -->
         <!-- svelte-ignore a11y-click-events-have-key-events -->
-        <div class="headerIcon" title={showInfoBox ? 'Lukk infoboks' : 'Åpne infoboks'} on:click={() => {showInfoBox = !showInfoBox}}><IconHelp /></div>
+        <!-- <div class="headerIcon" title={showInfoBox ? 'Lukk infoboks' : 'Åpne infoboks'} on:click={() => {showInfoBox = !showInfoBox}}><IconHelp /></div>
         <InfoBox content={'Her kan brukeren få litt info om chatvtfk. NB! Dette er en POC'} html={true} open={showInfoBox} onClose={() => {showInfoBox = !showInfoBox}} />
-    </div>
+    </div> -->
     <!-- Chatwindow -->
-    <div bind:this={element} class="container">
+    <!-- <div bind:this={element} class="container">
         {#await handleChatCompletion()}
             <MessageBox role={'assistant'} message={'...'} />
         {:then} 
@@ -137,11 +138,11 @@
                 {/if}
             {/if}
         {/await}
-    </div>
+    </div> -->
     
 
     <!-- Input field and send button -->
-    <div class="inputWrapper">
+    <!-- <div class="inputWrapper">
         <input
             bind:value={inputMessage}
             on:keypress={onKeyPress}
@@ -158,8 +159,7 @@
         >
             <Send></Send>
         </button>
-    </div>
-    
+    </div> -->
 </main>
 
 <style>
