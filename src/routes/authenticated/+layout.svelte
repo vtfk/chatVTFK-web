@@ -11,10 +11,14 @@
     
     onMount(async () => {
         try {
-            msalUser = sessionStorage.getItem(varConfig?.msal.user)
-            msalUser = JSON.parse(msalUser)
-            msalToken = sessionStorage.getItem(varConfig?.msal.token)
-            msalToken = JSON.parse(msalToken)
+            if(varConfig !== null || varConfig !== undefined) {
+                msalUser = sessionStorage.getItem(varConfig?.msal.user)
+                msalUser = JSON.parse(msalUser)
+                msalToken = sessionStorage.getItem(varConfig?.msal.token)
+                msalToken = JSON.parse(msalToken)
+            } else {
+                console.log('Oi, her er noe galt')
+            }
         }catch(error) {
             console.log(error)
         }
