@@ -115,7 +115,7 @@
         <InfoBox content={'Her kan brukeren få litt info om chatvtfk. NB! Dette er en POC'} html={true} open={showInfoBox} onClose={() => {showInfoBox = !showInfoBox}} />
     </div>
     <!-- Chatwindow -->
-    <!-- <div bind:this={element} class="container">
+    <div bind:this={element} class="container">
         {#await handleChatCompletion()}
             <MessageBox role={'assistant'} message={'...'} />
         {:then} 
@@ -137,7 +137,7 @@
                 {/if}
             {/if}
         {/await}
-    </div> -->
+    </div>
     
 
     <!-- Input field and send button -->
