@@ -15,9 +15,17 @@
         user = get(userStore)
         console.log(get(userStore))
         msalToken = sessionStorage.getItem(`${user.homeAccountId}-login.windows.net-accesstoken-${user.idTokenClaims.aud}-${user.tenantId}-openid profile user.read email--`)
-        msalToken = JSON.parse(msalToken)
+        if (msalToken) {
+            msalToken = JSON.parse(msalToken)
+        } else {
+            msalToken = {}
+        }
         msalUser = sessionStorage.getItem(`${user.homeAccountId}-login.windows.net-${user.tenantId}`)
-        msalUser = JSON.parse(msalUser)
+        if(msalUser) {
+            msalUser = JSON.parse(msalUser)
+        } else {
+            msalUser = {}
+        }
         console.log('Jeg kom hit i vercel5')
         // try {
         //     if(varConfig !== null || varConfig !== undefined) {

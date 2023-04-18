@@ -21,7 +21,11 @@
     $: if($navigating) {
         try {
             msal = sessionStorage.getItem(`${user.homeAccountId}-login.windows.net-accesstoken-${user.idTokenClaims.aud}-${user.tenantId}-openid profile user.read email--`)
-            msal = JSON.parse(msal)
+            if(msal) {
+                msal = JSON.parse(msal)
+            } else {
+                msal = {}
+            }
         } catch(error) {
             console.log(error)
         } finally { 
