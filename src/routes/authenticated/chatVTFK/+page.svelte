@@ -30,7 +30,7 @@
 
     onMount (async () => {
         console.log('Jeg kom hit i vercel7')
-        accessToken = get(accesstokenStore)
+        // accessToken = get(accesstokenStore)
         // response = await axios.post(`${api.local.url}/Response`, initialMessage, {headers: {'Content-Type': 'application/json', Authorization: `${accessToken.secret}`, 'Access-Control-Allow-Origin': '*'}})
         firstRun = true
         console.log('Jeg kom hit i vercel8')
@@ -65,7 +65,7 @@
 
         // let response = await axios.post('/api/chat', body, {headers: {'Content-Type': 'application/json'}})
         if(firstRun !== true) {
-            response = await axios.post(`${api.local.url}/Response`, body, {headers: {'Content-Type': 'application/json', Authorization: `${accessToken.secret}`, 'Access-Control-Allow-Origin': '*'}})
+            // response = await axios.post(`${api.local.url}/Response`, body, {headers: {'Content-Type': 'application/json', Authorization: `${accessToken.secret}`, 'Access-Control-Allow-Origin': '*'}})
         } else {
             
         }

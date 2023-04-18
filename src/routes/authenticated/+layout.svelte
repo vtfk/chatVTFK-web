@@ -35,11 +35,11 @@
 
     // This function only exists to create a delay for the store to actually get the values.
     const test = async () => {
-        const user = await msalUser
-        const token = await msalToken
-        accesstokenStore.set(token)
+        // const user = await msalUser
+        // const token = await msalToken
+        // accesstokenStore.set(token)
 
-        return await user
+        // return await user
     }
 </script>
 
