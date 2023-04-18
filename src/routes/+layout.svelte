@@ -25,7 +25,7 @@
             console.log('Vi har satt bruker i store')
             console.log(get(userStore))
         } else {
-            console.log('logga inn jo!!')
+            console.log('logga inn jo!')
         }
         
     }
