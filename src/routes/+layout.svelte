@@ -2,9 +2,14 @@
     import { goto } from '$app/navigation'
     import { navigating } from "$app/stores"
     import { browser } from "$app/environment"
-    import { varConfig, web } from '../../config';
+    import { web } from '../../config';
+	import { userStore } from '$lib/services/store';
+	import { get } from 'svelte/store';
+
 
     let msal
+    
+    const user = get(userStore)
 
     if(browser && window.location.pathname === '/') {
         window.location.href = `${web.url}/authenticated/chatVTFK`
@@ -12,7 +17,7 @@
     // If user is navigating, check if user have a valid token. If the token is not valid, do something
     $: if($navigating) {
         try {
-            msal = sessionStorage.getItem(varConfig.msal.token)
+            msal = sessionStorage.getItem(`${user.homeAccountId}-login.windows.net-accesstoken-${user.idTokenClaims.aud}-${user.tenantId}-openid profile user.read email--`)
             msal = JSON.parse(msal)
         } catch(error) {
             console.log(error)
