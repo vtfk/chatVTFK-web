@@ -9,8 +9,7 @@
 	import { token } from '../../../lib/services/tiktoken.js'
 	import MessageBox from '../../../components/MessageBox.svelte';
     import { api } from '../../../../config';
-	import IconSpinner from '../../../components/Icons/IconSpinner.svelte';
-	import { accesstokenStore } from '$lib/services/store';
+	import { accesstokenStore, userStore } from '$lib/services/store';
 	import { get } from 'svelte/store';
 
 	let messages = [] 
