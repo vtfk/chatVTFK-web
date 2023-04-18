@@ -1,4 +1,4 @@
-<script>
+<!-- <script>
     import { goto } from '$app/navigation'
     import { navigating } from "$app/stores"
     import { browser } from "$app/environment"
@@ -41,5 +41,5 @@
     }
     console.log('Jeg kom hit i vercel2')
 </script>
-
+ -->
 <slot></slot>
