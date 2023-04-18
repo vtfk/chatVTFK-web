@@ -6,6 +6,7 @@
     import { web } from '../../config';
 	import { userStore } from '$lib/services/store';
 	import { get } from 'svelte/store';
+	import login from '$lib/Auth/Login';
 
     let msal
     
@@ -13,6 +14,20 @@
     console.log('Jeg kom hit i vercel')
     if(browser && window.location.pathname === '/') {
         window.location.href = `${web.url}/authenticated/chatVTFK`
+    }
+
+    const loginHandler = async () => {
+        if(!get(userStore)) {
+            console.log('Vi logger inn')
+            const user = await login()
+            console.log('Vi har logger inn')
+            userStore.set(user)
+            console.log('Vi har satt bruker i store')
+            console.log(get(userStore))
+        } else {
+            console.log('logga inn jo!')
+        }
+        
     }
     // If user is navigating, check if user have a valid token. If the token is not valid, do something
     // $: if($navigating) {
@@ -46,5 +61,8 @@
     // }
     console.log('Jeg kom hit i vercel2')
 </script>
-
-<slot></slot>
+{#await loginHandler()}
+    <p>logger inn</p>
+{:then} 
+    <slot></slot>
+{/await}
