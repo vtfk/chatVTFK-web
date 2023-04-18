@@ -10,9 +10,7 @@ const config = {
 		// adapter: adapter({
 		// 	runtime: 'nodejs18.x',
 		// })
-		kit: {
-			adapter: vercel()
-		}
+		adapter: vercel()
 	}
 };
 
