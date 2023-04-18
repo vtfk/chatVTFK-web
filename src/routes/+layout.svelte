@@ -7,7 +7,7 @@
     let msal
 
     if(browser && window.location.pathname === '/') {
-        window.location.href = `${web.url}/authenticated`
+        window.location.href = `${web.url}/authenticated/chatVTFK`
     }
     // If user is navigating, check if user have a valid token. If the token is not valid, do something
     $: if($navigating) {
@@ -19,7 +19,7 @@
         } finally { 
             // If token is valid
             if(msal !== null && msal.expiresOn > Date.now() / 1000) {
-                goto(`${web.url}/authenticated`)
+                goto(`${web.url}/authenticated/chatVTFK`)
                 // if($navigating.to.url.pathname === 'http://localhost:5173/authenticated/chatVTFK') {
                 //     goto('http://localhost:5173/authenticated/chatVTFK')
                 // } else {

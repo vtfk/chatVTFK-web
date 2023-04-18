@@ -3,8 +3,8 @@ import login from "./lib/Auth/Login.js"
 import { browser } from "$app/environment"
 import { varConfig, web } from "../config"
 
-if(typeof(varConfig) === "object") {
-    // let msal = sessionStorage.getItem(varConfig.msal.token)
+// if(typeof(varConfig) === "object") {
+    let msal = sessionStorage.getItem(varConfig.msal.token)
     msal = JSON.parse(msal)
     // Skip login on hard reload if token is still valid
     if(msal !== null && msal.expiresOn > Date.now() / 1000) {
@@ -22,6 +22,4 @@ if(typeof(varConfig) === "object") {
         const user = await login()
     //     // userStore.set(await user)
     } 
-} else {
-    await login()
-}
+// } 
