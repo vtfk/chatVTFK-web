@@ -4,16 +4,20 @@
     import IconSpinner from '../../components/Icons/IconSpinner.svelte';
 	import { onMount } from 'svelte';
     import { varConfig } from '../../../config';
-    import { accesstokenStore } from '../../lib/services/store';
+    import { accesstokenStore, msalClientStore } from '../../lib/services/store';
 
     let msalUser
     let msalToken
     
     onMount(async () => {
-        msalUser = sessionStorage.getItem(varConfig.msal.user)
-        msalUser = JSON.parse(msalUser)
-        msalToken = sessionStorage.getItem(varConfig.msal.token)
-        msalToken = JSON.parse(msalToken)
+        try {
+            msalUser = sessionStorage.getItem(varConfig?.msal.user)
+            msalUser = JSON.parse(msalUser)
+            msalToken = sessionStorage.getItem(varConfig?.msal.token)
+            msalToken = JSON.parse(msalToken)
+        }catch(error) {
+            console.log(error)
+        }
     })
 
     // This function only exists to create a delay for the store to actually get the values.
