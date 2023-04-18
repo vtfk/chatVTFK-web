@@ -10,27 +10,27 @@
     let msalToken
     
     onMount(async () => {
-        try {
-            if(varConfig !== null || varConfig !== undefined) {
-                msalUser = sessionStorage.getItem(varConfig?.msal.user)
-                msalUser = JSON.parse(msalUser)
-                msalToken = sessionStorage.getItem(varConfig?.msal.token)
-                msalToken = JSON.parse(msalToken)
-            } else {
-                console.log('Oi, her er noe galt')
-            }
-        }catch(error) {
-            console.log(error)
-        }
+        // try {
+        //     if(varConfig !== null || varConfig !== undefined) {
+        //         msalUser = sessionStorage.getItem(varConfig?.msal.user)
+        //         msalUser = JSON.parse(msalUser)
+        //         msalToken = sessionStorage.getItem(varConfig?.msal.token)
+        //         msalToken = JSON.parse(msalToken)
+        //     } else {
+        //         console.log('Oi, her er noe galt')
+        //     }
+        // }catch(error) {
+        //     console.log(error)
+        // }
     })
 
     // This function only exists to create a delay for the store to actually get the values.
     const test = async () => {
-        const user = await msalUser
-        const token = await msalToken
-        accesstokenStore.set(token)
+        // const user = await msalUser
+        // const token = await msalToken
+        // accesstokenStore.set(token)
 
-        return await user
+        // return await user
     }
 </script>
 
