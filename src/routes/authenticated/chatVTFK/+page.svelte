@@ -33,10 +33,6 @@
         firstRun = true
     })
 
-    const test = async () => {
-        return await accessToken
-    }
-
     const handleChatCompletion = async () => {
         if(document.getElementById('search') !== null) {
             document.getElementById('search').disabled = true
