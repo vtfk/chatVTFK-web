@@ -37,13 +37,13 @@
     })
 
     const handleChatCompletion = async () => {
-        if(document.getElementById('search') !== null) {
-            document.getElementById('search').disabled = true
-        }
+        // if(document.getElementById('search') !== null) {
+        //     document.getElementById('search').disabled = true
+        // }
 
-        if(document.getElementById('searchButton') !== null) {
-            document.getElementById('searchButton').disabled = true
-        }
+        // if(document.getElementById('searchButton') !== null) {
+        //     document.getElementById('searchButton').disabled = true
+        // }
         
 		const userMessage = {
 			role: 'user',
@@ -51,9 +51,9 @@
 		}
 
         // Clear input
-        if(document.getElementById('search') !== null) {
-            document.getElementById('search').value = ''
-        }
+        // if(document.getElementById('search') !== null) {
+        //     document.getElementById('search').value = ''
+        // }
 
         const body = JSON.stringify({
 				isInitializing: messages.length === 0,
@@ -79,13 +79,13 @@
         // Clean up
 		inputMessage = ''
         isEnterPressed = false
-        if(document.getElementById('search') !== null) {
-            document.getElementById('search').disabled = false
-            document.getElementById('search').focus()
-        }
-        if(document.getElementById('search') !== null) {
-            document.getElementById('searchButton').disabled = false
-        }
+        // if(document.getElementById('search') !== null) {
+        //     document.getElementById('search').disabled = false
+        //     document.getElementById('search').focus()
+        // }
+        // if(document.getElementById('search') !== null) {
+        //     document.getElementById('searchButton').disabled = false
+        // }
         await tick()
         scrollToBottom(element)
         firstRun = false
