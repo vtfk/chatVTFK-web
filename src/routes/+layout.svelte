@@ -14,11 +14,11 @@
     
     const user = get(userStore)
     console.log('Jeg kom hit i vercel')
-    // if(browser && window.location.pathname === '/') {
-    //     window.location.href = `${web.url}/authenticated/chatVTFK`
-    // }
+    if(browser && window.location.pathname === '/') {
+        window.location.href = `${web.url}/authenticated/chatVTFK`
+    }
     // If user is navigating, check if user have a valid token. If the token is not valid, do something
-    $: if($navigating) {
+    $: if(false) {
         try {
             msal = sessionStorage.getItem(`${user.homeAccountId}-login.windows.net-accesstoken-${user.idTokenClaims.aud}-${user.tenantId}-openid profile user.read email--`)
             if(msal) {
@@ -49,55 +49,4 @@
     console.log('Jeg kom hit i vercel2')
 </script>
 
-<div>
-    {#await msal}
-        <div class="centerSpinner">
-            <IconSpinner />
-        </div>
-    {:then} 
-        <div class="sideNavWrapper">
-            <SideNav/>
-        </div>
-        <div class="contentWrapper">
-            <div class="content">
-                <h2 style="margin-bottom: 1rem; margin-left: 0.5rem;">Hei</h2>
-                <slot></slot>
-            </div>
-        </div>
-    {/await}
-   
-</div>
-
-<style>
-    .sideNavWrapper, .contentWrapper {
-        min-height: 100vh;
-    }
-
-    .sideNavWrapper {
-        position: fixed;
-        width: calc(var(--sidenavWidth));
-        background-color: var(--varme-1);
-        top: 0;
-        bottom: 0;
-        left: 0;
-        overflow-y:auto;
-        overflow-x:hidden;
-    }
-
-    .contentWrapper {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-wrap: wrap;
-        margin-left: var(--sidenavWidth);
-        width: calc(98vw - var(--sidenavWidth));
-        padding: 0px 32px;
-        overflow:auto;
-    }
-
-    .content {
-        margin-top: 2rem;
-        width: 90%;
-        padding: 3rem;
-    } 
-</style>
+<slot></slot>
