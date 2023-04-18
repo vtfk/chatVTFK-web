@@ -10,7 +10,7 @@
     let msal
     
     const user = get(userStore)
-
+    console.log(web.url)
     if(browser && window.location.pathname === '/') {
         window.location.href = `${web.url}/authenticated/chatVTFK`
     }
