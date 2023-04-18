@@ -9,13 +9,15 @@
     let msalUser
     let msalToken
     let user
-
+    console.log('Jeg kom hit i vercel3')
     onMount(async () => {
+        console.log('Jeg kom hit i vercel4')
         user = get(userStore)
         msalToken = sessionStorage.getItem(`${user.homeAccountId}-login.windows.net-accesstoken-${user.idTokenClaims.aud}-${user.tenantId}-openid profile user.read email--`)
         msalToken = JSON.parse(msalToken)
         msalUser = sessionStorage.getItem(`${user.homeAccountId}-login.windows.net-${user.tenantId}`)
         msalUser = JSON.parse(msalUser)
+        console.log('Jeg kom hit i vercel5')
         // try {
         //     if(varConfig !== null || varConfig !== undefined) {
         //         msalUser = sessionStorage.getItem(varConfig?.msal.user)

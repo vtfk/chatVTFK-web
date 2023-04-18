@@ -10,7 +10,7 @@
     let msal
     
     const user = get(userStore)
-    console.log(web.url)
+    console.log('Jeg kom hit i vercel')
     if(browser && window.location.pathname === '/') {
         window.location.href = `${web.url}/authenticated/chatVTFK`
     }
@@ -39,6 +39,7 @@
             }
         }
     }
+    console.log('Jeg kom hit i vercel2')
 </script>
 
 <slot></slot>

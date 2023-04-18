@@ -26,10 +26,14 @@
 		content: 'Skriv en kort introduksjon og kort om hva du kan brukes til. Du heter ChatVTFK'
     }
 
+    console.log('Jeg kom hit i vercel6')
+
     onMount (async () => {
+        console.log('Jeg kom hit i vercel7')
         accessToken = get(accesstokenStore)
         response = await axios.post(`${api.local.url}/Response`, initialMessage, {headers: {'Content-Type': 'application/json', Authorization: `${accessToken.secret}`, 'Access-Control-Allow-Origin': '*'}})
         firstRun = true
+        console.log('Jeg kom hit i vercel8')
     })
 
     const handleChatCompletion = async () => {
