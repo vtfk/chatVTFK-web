@@ -4,7 +4,7 @@ import { browser } from "$app/environment"
 import { varConfig, web } from "../config"
 
 if(typeof(varConfig) === "object") {
-    let msal = sessionStorage.getItem(varConfig.msal.token)
+    // let msal = sessionStorage.getItem(varConfig.msal.token)
     msal = JSON.parse(msal)
     // Skip login on hard reload if token is still valid
     if(msal !== null && msal.expiresOn > Date.now() / 1000) {
