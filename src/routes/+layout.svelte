@@ -12,9 +12,9 @@
     
     const user = get(userStore)
     console.log('Jeg kom hit i vercel')
-    // if(browser && window.location.pathname === '/') {
-    //     window.location.href = `${web.url}/authenticated/chatVTFK`
-    // }
+    if(browser && window.location.pathname === '/') {
+        window.location.href = `${web.url}/authenticated/chatVTFK`
+    }
 
     const loginHandler = async () => {
         if(!get(userStore)) {
