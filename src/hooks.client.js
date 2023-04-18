@@ -11,7 +11,7 @@ if(msal !== null && msal.expiresOn > Date.now() / 1000) {
     if(browser) {
         if(window.location.pathname === '/') {
             // Nødløsning frem til goto funksjonen fungerer.
-            window.location.href = `${web.url}/authenticated/chatVTFK`
+            // window.location.href = `${web.url}/authenticated/chatVTFK`
             // Dette funker ikke, er noe svelte greier som ikke funker som det skal.
             // goto('http://localhost:5173/authenticated')
         }
@@ -20,4 +20,4 @@ if(msal !== null && msal.expiresOn > Date.now() / 1000) {
 } else {
     const user = await login()
     // userStore.set(await user)
-}
+} 
