@@ -12,8 +12,8 @@
     console.log('Jeg kom hit i vercel3')
     onMount(async () => {
         console.log('Jeg kom hit i vercel4')
-        user = get(userStore)
-        console.log(get(userStore))
+        // user = get(userStore)
+        // console.log(get(userStore))
         // msalToken = sessionStorage.getItem(`${user.homeAccountId}-login.windows.net-accesstoken-${user.idTokenClaims.aud}-${user.tenantId}-openid profile user.read email--`)
         // msalToken = JSON.parse(msalToken)
         // msalUser = sessionStorage.getItem(`${user.homeAccountId}-login.windows.net-${user.tenantId}`)
