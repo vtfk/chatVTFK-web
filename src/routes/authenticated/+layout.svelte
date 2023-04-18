@@ -45,7 +45,7 @@
         </div>
         <div class="contentWrapper">
             <div class="content">
-                <h2 style="margin-bottom: 1rem; margin-left: 0.5rem;"> Hei, {msalUser.name} 🤓</h2>
+                <h2 style="margin-bottom: 1rem; margin-left: 0.5rem;"> Hei, {'msalUser.name'} 🤓</h2>
                 <slot></slot>
             </div>
         </div>
