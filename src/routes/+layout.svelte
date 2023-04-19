@@ -7,6 +7,7 @@
 	import { userStore } from '$lib/services/store';
 	import { get } from 'svelte/store';
 	import login from '$lib/Auth/Login';
+	import IconSpinner from '../components/Icons/IconSpinner.svelte';
 
     let msal
     
@@ -63,7 +64,9 @@
     console.log('Jeg kom hit i vercel2')
 </script>
 {#await loginHandler()}
-    <p>logger inn</p>
+    <div class="centerSpinner">
+        <IconSpinner />
+    </div>
 {:then} 
     <slot></slot>
 {/await}

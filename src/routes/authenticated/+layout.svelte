@@ -13,15 +13,12 @@
     onMount(async () => {
         console.log('Jeg kom hit i vercel4')
         user = get(userStore)
-        // console.log(get(userStore))
-        // msalToken = sessionStorage.getItem('1f5766eb-28da-4bdc-9c18-dfe735d0f547.08f3813c-9f29-482f-9aec-16ef7cbf477a-login.windows.net-accesstoken-d68ca4eb-4e3f-4b78-aa38-ed38fa75e786-08f3813c-9f29-482f-9aec-16ef7cbf477a-openid profile user.read email--')
         msalToken = sessionStorage.getItem(`${user.homeAccountId}-login.windows.net-accesstoken-${user.idTokenClaims.aud}-${user.tenantId}-openid profile user.read email--`)
         if (msalToken) {
             msalToken = JSON.parse(msalToken)
         } else {
             msalToken = {}
         }
-        // msalUser = sessionStorage.getItem('1f5766eb-28da-4bdc-9c18-dfe735d0f547.08f3813c-9f29-482f-9aec-16ef7cbf477a-login.windows.net-08f3813c-9f29-482f-9aec-16ef7cbf477a')
         msalUser = sessionStorage.getItem(`${user.homeAccountId}-login.windows.net-${user.tenantId}`)
         if(msalUser) {
             msalUser = JSON.parse(msalUser)
@@ -65,7 +62,7 @@
         </div>
         <div class="contentWrapper">
             <div class="content">
-                <h2 style="margin-bottom: 1rem; margin-left: 0.5rem;"> Hei 🤓</h2>
+                <h2 style="margin-bottom: 1rem; margin-left: 0.5rem;"> Hei, {msalUser.name} 🤓</h2>
                 <slot></slot>
             </div>
         </div>
