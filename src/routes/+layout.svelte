@@ -57,6 +57,6 @@
     <div class="centerSpinner">
         <IconSpinner />
     </div>
-{:then res} 
+{:then} 
     <slot/>
 {/await}

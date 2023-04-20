@@ -7,17 +7,14 @@
 <div class=container>
     <div class="logoContainer">
         <Logo />
-    </div>
-    <div style="text-align: center; width: 100%;">
-        <p style="padding: 0px;"><strong>ChatVTFK</strong></p>
-        <!-- {#if environment === 'test'}
+         <!-- {#if environment === 'test'}
             <p style="padding: 0px;"><strong>TEST</strong></p>
-        {/if} -->
+        {/if}  -->
     </div>
-    <div class="sideNavItemsContainer">
-        <div class="sideNavFlexHelper">
-            <div class="sideNavItem">
-                <a href="/authenticated">
+    <div class="topNavItemsContainer">
+        <div class="topNavFlexHelper">
+            <div class="topNavItem">
+                <a href="/authenticated" style="width: 100%;">
                     <div class="icon">
                         🏡
                     </div>
@@ -25,8 +22,8 @@
                 </a>
             </div>
             {#if roles.includes('chatVTFK.chatCompletion')}
-                <div class="sideNavItem">
-                    <a href="/authenticated/chatVTFK">
+                <div class="topNavItem">
+                    <a href="/authenticated/chatVTFK" style="width: 100%;">
                         <div class="icon">
                             🤓
                         </div>
@@ -40,51 +37,51 @@
 
 <style>
     .container {
+        display: flex;
         width: 100%;
         height: 100%;
-        display: flex;
-        flex-direction: column;
+        flex-direction: row;
     }
     .logoContainer {
         margin: 0px auto;
-        padding-top: 36px;
-        width: 3.5rem;
+        margin: 1.5rem;
+        width: 3rem;
     }
-    .sideNavItemsContainer {
+    .topNavItemsContainer {
         flex: 1;
-        display: flex;
-        align-items: center;
-        justify-content: center;
         margin-top: 0px;
-        margin-bottom: 150px;
         width: 100%;
-        text-align: center;
+        height: 100%;
     }
 
-    .sideNavFlexHelper {
+    .topNavFlexHelper {
+        display: flex;
         width: 100%;
     }
 
-    .sideNavItem {
+    .topNavItem {
+        display: flex;
         width: 100%;
+        height: 100%;
+        justify-content: center;
         margin: 0 auto;
-        text-align: center;
     }
 
-    .siteNavItemActive, .sideNavItem:hover {
+    .topNavItemActive, .topNavItem:hover {
         background: #dcac89;
     }
 
-    .sideNavItem:hover {
+    .topNavItem:hover {
         cursor: pointer;
+        width: 100%;
     }
 
     .icon {
         color: #000000;
-        width: 2rem;
+        width: 1.5rem;
         height: 2rem;
-        margin: 1rem;
-        margin-bottom: -1rem;
+        margin: 2rem;
+        margin-bottom: -1.5rem;
         margin-left: auto;
         margin-right: auto;
         display: block;
@@ -107,5 +104,6 @@
         font-size: 16px;
         color: #000000;
         display: block;
+        text-align: center;
     }
 </style>

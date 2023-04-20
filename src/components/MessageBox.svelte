@@ -32,14 +32,14 @@
         align-self: flex-start;
         background-color:  var(--himmel-3);
         border-radius: 1rem;
-        max-width: 50%;
+        max-width: 75%;
     }
 
     .user { 
         align-self: flex-end;
         background-color: var(--lavendel-3); 
         border-radius: 1rem;
-        max-width: 50%;
+        max-width: 75%;
     }
 
     .message { 
@@ -47,5 +47,12 @@
         flex-wrap: wrap;
         overflow-y: auto;
         padding: 0.7rem;
+        font-size: 1rem;
+    }
+
+    @media(max-width: 885px) {
+        .message {
+            font-size: 0.9rem;
+        }
     }
 </style>

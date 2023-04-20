@@ -5,6 +5,7 @@
 	import { onMount } from 'svelte';
     import { accesstokenStore, userRoles, userStore } from '../../lib/services/store';
 	import { get } from 'svelte/store';
+	import TopNav from '../../components/TopNav.svelte';
 
     let msalUser
     let msalToken
@@ -57,9 +58,12 @@
         <div class="sideNavWrapper">
             <SideNav roles={roles}/>
         </div>
+        <div class="topNavWrapper">
+            <TopNav roles={roles} />
+        </div>
         <div class="contentWrapper">
             <div class="content">
-                <h2 style="margin-bottom: 1rem; margin-left: 0.5rem;"> Hei, {msalUser.name} 🤓</h2>
+                <h2> Hei, {msalUser.name} 🤓</h2>
                 <slot></slot>
             </div>
         </div>
@@ -70,6 +74,18 @@
 <style>
     .sideNavWrapper, .contentWrapper {
         min-height: 100vh;
+    }
+
+    .topNavWrapper { 
+        position: sticky;
+        width: 100%;
+        background-color: var(--varme-1);
+        height: calc((var(--topNavHeight)));
+        top: 0;
+        bottom: 0;
+        left: 0;
+        overflow-y:auto;
+        overflow-x:hidden;
     }
 
     .sideNavWrapper {
@@ -86,7 +102,7 @@
     .contentWrapper {
         display: flex;
         justify-content: center;
-        align-items: center;
+        align-items: center; 
         flex-wrap: wrap;
         margin-left: var(--sidenavWidth);
         width: calc(98vw - var(--sidenavWidth));
@@ -99,4 +115,38 @@
         width: 90%;
         padding: 3rem;
     } 
+
+    h2 {
+        margin-bottom: 1rem; 
+        margin-left: 0.5rem;
+    }
+
+    @media(max-width: 885px) {
+        .sideNavWrapper {
+            display: none;
+        }
+
+        .contentWrapper {
+            margin-left: 0;
+            width: auto;
+            padding: 0px 0px;
+            margin-top: 0rem;
+        }
+
+        .content {
+            margin-top: 0rem;
+            width: 100%;
+            padding: 2rem;
+        }
+
+        h2 {
+            margin-bottom: 0rem; margin-left: 0rem;
+        }
+    }
+
+    @media(min-width: 886px) {
+        .topNavWrapper {
+            display: none;
+        }
+    }
 </style>

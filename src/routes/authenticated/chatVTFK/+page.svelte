@@ -150,7 +150,7 @@
                 id="searchButton"
                 class={firstRun === true ? "displayNone" : "buttonStyle"}
             >
-                <Send></Send>
+                Send
             </button>
         </div>
         {:else}
@@ -202,15 +202,16 @@
     }
 
     .buttonStyle {
-        background-color: var(--himmel-1);
-        border: none; 
-        border-radius: 10rem;
-        margin-left: -10px;
-        padding: 6px 7px 0px 3px;
+        background-color: white;
+        border: grey 1px solid;
+        color: black; 
+        border-radius: 10%;
+        margin-right: 0.4rem;
+        padding: 0.55rem 0.55rem 0.55rem 0.55rem;
         text-align: center; 
         text-decoration: none; 
         display: inline-block; 
-        font-size: 16px;  
+        font-size: 1.3rem;  
         cursor: pointer; 
     }
 
@@ -238,4 +239,58 @@
 		margin-left: 4px;
         margin-bottom: 1rem;
 	}
+
+    @media(max-width: 885px) {
+        h2 {
+            margin-bottom: 0rem; margin-left: 0rem;
+        }
+
+        .inputWrapper {
+            display: flex;
+            align-items: center;
+            padding-right: 6rem;
+            width: 100vw;
+            margin-left: 0.6rem;
+        }
+
+        .pageIntro {
+            margin-bottom: 36px;
+            display: flex;
+            flex-wrap: wrap;
+            width: 87%;
+            margin-left: 0.5rem;
+        }
+
+        .buttonStyle {
+            font-size: 1rem;
+            margin-right: -1rem;
+            padding: 0.25rem 0.25rem 0.25rem 0.25rem;  
+        }
+
+        .inputStyle {
+            padding: 1rem;
+            margin-right: 0.5rem;
+        }
+
+        .inputStyle:disabled {
+            cursor: not-allowed;
+            padding: 1rem;
+            margin-right: 0.5rem;
+        }
+
+        .container {
+            display: flex;
+            background-color: var(--gin);
+            border-radius: 1rem;
+            min-height: 60vh;
+            max-height: 60vh;
+            min-width: 70vw;
+            max-width: 90vw;
+            margin: 10px;
+            padding: 20px;
+            overflow-y: auto;
+            flex-direction:column;
+            transform: translateZ(0);
+        }
+    }
 </style>
