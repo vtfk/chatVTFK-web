@@ -1,6 +1,6 @@
 
 import { PublicClientApplication } from '@azure/msal-browser'
-import { authConfig } from '../../../config'
+import { api, authConfig } from '../../../config'
 import { msalClientStore } from '$lib/services/store.js' 
 import { get } from 'svelte/store'
 
@@ -24,7 +24,7 @@ const login = async (forceLogin = false) => {
     msalClientStore.set(msalClient)
     return loginResponse.account
   } else {
-    msalClient.loginRedirect({ scopes: ['User.Read'] })
+    msalClient.loginRedirect({ scopes: api.scope })
   }
 }
 

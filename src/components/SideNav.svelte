@@ -1,5 +1,7 @@
 <script>
     import Logo from './Icons/Logo.svelte'
+
+    export let roles = []
 </script>
 
 <div class=container>
@@ -22,14 +24,16 @@
                     <p>Hjem</p>
                 </a>
             </div>
-            <div class="sideNavItem">
-                <a href="/authenticated/chatVTFK">
-                    <div class="icon">
-                        🤓
-                    </div>
-                    <p>Chat</p>
-                </a>
-            </div>
+            {#if roles.includes('chatVTFK.chatCompletion')}
+                <div class="sideNavItem">
+                    <a href="/authenticated/chatVTFK">
+                        <div class="icon">
+                            🤓
+                        </div>
+                        <p>Chat</p>
+                    </a>
+                </div>
+            {/if}
         </div>
     </div>
             

@@ -3,19 +3,30 @@
 	import SideNav from "../../components/SideNav.svelte";
     import IconSpinner from '../../components/Icons/IconSpinner.svelte';
 	import { onMount } from 'svelte';
-    import { accesstokenStore, userStore } from '../../lib/services/store';
+    import { accesstokenStore, userRoles, userStore } from '../../lib/services/store';
 	import { get } from 'svelte/store';
 
     let msalUser
     let msalToken
     let user
-    console.log('Jeg kom hit i vercel3')
+    let accessToken
+    let roles
+
     onMount(async () => {
-        console.log('Jeg kom hit i vercel4')
         user = get(userStore)
-        msalToken = sessionStorage.getItem(`${user.homeAccountId}-login.windows.net-accesstoken-${user.idTokenClaims.aud}-${user.tenantId}-openid profile user.read email--`)
+        // msalToken = sessionStorage.getItem(`${user.homeAccountId}-login.windows.net-accesstoken-${user.idTokenClaims.aud}-${user.tenantId}-openid profile user.read email--`)
+        msalToken = sessionStorage.getItem(`${user.homeAccountId}-login.windows.net-accesstoken-${user.idTokenClaims.aud}-${user.tenantId}-api://c443279c-2806-488f-b032-c9cf7fa52852/user_impersonation--`)
         if (msalToken) {
             msalToken = JSON.parse(msalToken)
+            accessToken = msalToken?.secret
+            const token_parts = accessToken.split(".")
+            const token_payload = JSON.parse(atob(token_parts[1]))
+            if([token_payload?.roles].length > 0) {
+                roles = token_payload.roles
+                userRoles.set(roles)
+            } else {
+                roles = undefined
+            }
         } else {
             msalToken = {}
         }
@@ -25,20 +36,6 @@
         } else {
             msalUser = {}
         }
-        
-        console.log('Jeg kom hit i vercel5')
-        // try {
-        //     if(varConfig !== null || varConfig !== undefined) {
-        //         msalUser = sessionStorage.getItem(varConfig?.msal.user)
-        //         msalUser = JSON.parse(msalUser)
-        //         msalToken = sessionStorage.getItem(varConfig?.msal.token)
-        //         msalToken = JSON.parse(msalToken)
-        //     } else {
-        //         console.log('Oi, her er noe galt')
-        //     }
-        // }catch(error) {
-        //     console.log(error)
-        // }
     })
 
     // This function only exists to create a delay for the store to actually get the values.
@@ -58,7 +55,7 @@
         </div>
     {:then} 
         <div class="sideNavWrapper">
-            <SideNav/>
+            <SideNav roles={roles}/>
         </div>
         <div class="contentWrapper">
             <div class="content">

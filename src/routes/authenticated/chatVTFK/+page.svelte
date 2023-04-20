@@ -5,12 +5,10 @@
 	import InfoBox from '../../../components/InfoBox.svelte';
 	import IconHelp from '../../../components/Icons/IconHelp.svelte';
     import { tick } from 'svelte';
-    import axios from 'axios'
-	import { token } from '../../../lib/services/tiktoken.js'
 	import MessageBox from '../../../components/MessageBox.svelte';
-    import { api } from '../../../../config';
-	import { accesstokenStore } from '$lib/services/store';
+	import { userRoles } from '$lib/services/store';
 	import { get } from 'svelte/store';
+	import { chatCompletion } from '$lib/services/useApi';
 
 	let messages = [] 
 	let inputMessage = '';
@@ -19,21 +17,19 @@
     let element
     let firstRun = false
     let response
-    let accessToken
+    let roles
     
     const initialMessage = {
 		role: 'system',
 		content: 'Skriv en kort introduksjon og kort om hva du kan brukes til. Du heter ChatVTFK'
     }
 
-    console.log('Jeg kom hit i vercel6')
-
     onMount (async () => {
-        console.log('Jeg kom hit i vercel7')
-        accessToken = get(accesstokenStore)
-        response = await axios.post(`${api.local.url}/Response`, initialMessage, {headers: {'Content-Type': 'application/json', Authorization: `${accessToken.secret}`, 'Access-Control-Allow-Origin': '*'}})
-        firstRun = true
-        console.log('Jeg kom hit i vercel8')
+        roles = get(userRoles).includes('chatVTFK.chatCompletion')
+        if(roles) {
+            response = await chatCompletion(initialMessage)
+            firstRun = true
+        }
     })
 
     const handleChatCompletion = async () => {
@@ -61,21 +57,17 @@
 				message: inputMessage
 		})
 
-        const test = await token(inputMessage)
-
-        // let response = await axios.post('/api/chat', body, {headers: {'Content-Type': 'application/json'}})
         if(firstRun !== true) {
-            response = await axios.post(`${api.local.url}/Response`, body, {headers: {'Content-Type': 'application/json', Authorization: `${accessToken.secret}`, 'Access-Control-Allow-Origin': '*'}})
+            response = await chatCompletion(body)
         } else {
-            
+            response = {}
         }
 		
         if (inputMessage) {
 			messages = messages.concat([userMessage])
 		}
 
-		messages = messages.concat(response.data)
-
+		messages = messages.concat(response)
         // Clean up
 		inputMessage = ''
         isEnterPressed = false
@@ -89,6 +81,7 @@
         await tick()
         scrollToBottom(element)
         firstRun = false
+
 		return response
 	}
 
@@ -115,50 +108,55 @@
         <InfoBox content={'Her kan brukeren få litt info om chatvtfk. NB! Dette er en POC'} html={true} open={showInfoBox} onClose={() => {showInfoBox = !showInfoBox}} />
     </div>
     <!-- Chatwindow -->
-    <div bind:this={element} class="container">
-        {#await handleChatCompletion()}
-            <MessageBox role={'assistant'} message={'...'} />
-        {:then} 
-            {#if inputMessage.length > 0 && isEnterPressed === true}
-                {#each messages as message}
-                    {#if message.role === 'user'}
-                        <MessageBox role={message.role} message={message.content} />
-                    {:else if message.role === 'assistant'}
-                        <MessageBox role={message.role} message={message.content} />
-                    {/if}
-                {/each}
-                <MessageBox role={'user'} message={inputMessage} />
+    {#if roles}
+        <div bind:this={element} class="container">
+            {#await handleChatCompletion()}
                 <MessageBox role={'assistant'} message={'...'} />
-            {:else}
-                {#if isEnterPressed === false}
+            {:then}
+                {#if inputMessage.length > 0 && isEnterPressed === true}
                     {#each messages as message}
-                        <MessageBox role={message.role} message={message.content} />
+                        {#if message.role === 'user'}
+                            <MessageBox role={message.role} message={message.content} />
+                        {:else if message.role === 'assistant'}
+                            <MessageBox role={message.role} message={message.content} />
+                        {/if}
                     {/each}
+                    <MessageBox role={'user'} message={inputMessage} />
+                    <MessageBox role={'assistant'} message={'...'} />
+                {:else}
+                    {#if isEnterPressed === false}
+                        {#each messages as message}
+                            <MessageBox role={message.role} message={message.content} />
+                        {/each}
+                    {/if}
                 {/if}
-            {/if}
-        {/await}
-    </div>
-    
+            {/await}
+        </div>
+        
 
-    <!-- Input field and send button -->
-    <div class="inputWrapper">
-        <input
-            bind:value={inputMessage}
-            on:keypress={onKeyPress}
-            type="text"
-            name="search"
-            id="search"
-            class={firstRun === true ? "displayNone" : "inputStyle"}
-        />
-        <button
-            on:click={handleChatCompletion}
-            type="submit"
-            id="searchButton"
-            class={firstRun === true ? "displayNone" : "buttonStyle"}
-        >
-            <Send></Send>
-        </button>
-    </div>
+        <!-- Input field and send button -->
+        <div class="inputWrapper">
+            <input
+                bind:value={inputMessage}
+                on:keypress={onKeyPress}
+                type="text"
+                name="search"
+                id="search"
+                class={firstRun === true ? "displayNone" : "inputStyle"}
+            />
+            <button
+                on:click={handleChatCompletion}
+                type="submit"
+                id="searchButton"
+                class={firstRun === true ? "displayNone" : "buttonStyle"}
+            >
+                <Send></Send>
+            </button>
+        </div>
+        {:else}
+            <p>Du har vist ikke tilgang til chatvtfk, mener du at du skal ha tilgang kontakt en voksen</p>
+    {/if}
+    
 </main>
 
 <style>

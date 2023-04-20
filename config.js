@@ -13,9 +13,8 @@ export const authConfig = {
 }
 
 export const api = {
-    local: {
-        url: env.PUBLIC_VITE_API_URL
-    }
+    url: env.PUBLIC_VITE_API_URL,
+    scope: (env.PUBLIC_VITE_API_SCOPE && env.PUBLIC_VITE_API_SCOPE.split(',')) ?? ['et skikkelig skup']
 }
 
 export const web = {
