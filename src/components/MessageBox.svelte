@@ -1,19 +1,26 @@
 <script>
+    import '../app.css'
+    import { marked } from 'marked'
+    import { formatedMessage } from '../lib/services/formatMessage'
+
 	export let role = '';
 	export let message = '';
 
     // True or false if its the user or the assistant(chatgpt)
 	const name = role === 'assistant'
+
 </script>
 
 <div class="container">
     {#if name}
         <div class="chatGPT">
-            <p class="message">{message}</p>
+            <div class="message">
+                <p class="message">{@html formatedMessage(`${message}`)}</p>
+            </div>
         </div>
     {:else}
         <div class="user">
-            <p class="message">{message}</p>
+            <p class="message">{@html formatedMessage(`${message}`)}</p>
         </div>
     {/if}
 </div>
@@ -43,9 +50,8 @@
     }
 
     .message { 
-        display: flex;
-        flex-wrap: wrap;
-        overflow-y: auto;
+        display: block;
+        overflow:hidden;
         padding: 0.7rem;
         font-size: 1rem;
     }

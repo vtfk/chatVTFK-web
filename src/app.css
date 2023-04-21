@@ -225,6 +225,16 @@ h1 {
   flex-wrap: wrap;
 }
 
+ol {
+  padding: 1rem;
+  margin-left: 1rem;
+}
+ul {
+  padding: 1rem;
+  margin-left: 1rem;
+}
+
+
 @media(max-width: 885px) {
   h1 {
     font-size: 36px;
