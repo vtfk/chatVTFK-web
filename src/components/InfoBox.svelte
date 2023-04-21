@@ -5,7 +5,7 @@
     export let open = false
     export let onClose = () => {console.log('LUKK!')}
     export let html = false
-
+    export let showCloseIcon = true
 </script>
 
 <div class="infoBox{ open ? ' open' : '' }">
@@ -17,10 +17,12 @@
                 {content}
             {/if}
         </div>
-        <div class="iconContainer">
-            <!-- svelte-ignore a11y-click-events-have-key-events -->
-            <div class="closeIcon" title="Lukk infoboks" on:click={onClose}><IconClose /></div>
-        </div>
+        {#if showCloseIcon}
+            <div class="iconContainer">
+                <!-- svelte-ignore a11y-click-events-have-key-events -->
+                <div class="closeIcon" title="Lukk infoboks" on:click={onClose}><IconClose /></div>
+            </div>
+        {/if}
     </div>
 </div>
 

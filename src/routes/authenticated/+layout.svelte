@@ -20,10 +20,10 @@
         if (msalToken) {
             msalToken = JSON.parse(msalToken)
             accessToken = msalToken?.secret
-            const token_parts = accessToken.split(".")
-            const token_payload = JSON.parse(atob(token_parts[1]))
-            if([token_payload?.roles].length > 0) {
-                roles = token_payload.roles
+            const tokenParts = accessToken.split(".")
+            const tokenPayload = JSON.parse(atob(tokenParts[1]))
+            if([tokenPayload?.roles].length > 0) {
+                roles = tokenPayload.roles
                 userRoles.set(roles)
             } else {
                 roles = undefined
@@ -102,7 +102,7 @@
     .contentWrapper {
         display: flex;
         justify-content: center;
-        align-items: center; 
+        /* align-items: center;  */
         flex-wrap: wrap;
         margin-left: var(--sidenavWidth);
         width: calc(98vw - var(--sidenavWidth));
