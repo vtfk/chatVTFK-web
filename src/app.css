@@ -27,12 +27,6 @@ select {
   box-sizing: border-box;
 }
 
-.centerSpinner {
-  display: flex;
-  justify-content: space-around;
-  margin: 1rem;
-}
-
 :root {
     line-height: 24px;
     font-weight: 400;

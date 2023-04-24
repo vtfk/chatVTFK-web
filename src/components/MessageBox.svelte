@@ -2,9 +2,10 @@
     import '../app.css'
     import { marked } from 'marked'
     import { formatedMessage } from '../lib/services/formatMessage'
+	import IconSpinner from './Icons/IconSpinner.svelte';
 
 	export let role = '';
-	export let message = '';
+	export let message
 
     // True or false if its the user or the assistant(chatgpt)
 	const name = role === 'assistant'
@@ -15,7 +16,11 @@
     {#if name}
         <div class="chatGPT">
             <div class="message">
-                <p class="message">{@html formatedMessage(`${message}`)}</p>
+                {#if message !== '...' }
+                    <p class="message">{@html formatedMessage(`${message}`)}</p>
+                {:else}
+                    <div><IconSpinner width={'2.5rem'} /></div>
+                {/if}
             </div>
         </div>
     {:else}
