@@ -39,6 +39,9 @@
 </div>
 
 <style>
+    strong {
+        color: #000000;
+    }
     .container {
         width: 100%;
         height: 100%;

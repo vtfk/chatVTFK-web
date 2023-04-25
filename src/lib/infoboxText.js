@@ -1,20 +1,42 @@
 // Placeholder 1
-export const placeholder1 = "<ul><li>Morbi in sem quis dui placerat ornare. Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed arcu. Cras consequat.</li>"+
-"<li>Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus.</li>"+
-"<li>Phasellus ultrices nulla quis nibh. Quisque a lectus. Donec consectetuer ligula vulputate sem tristique cursus. Nam nulla quam, gravida non, commodo a, sodales sit amet, nisi.</li>"+
-"<li>Pellentesque fermentum dolor. Aliquam quam lectus, facilisis auctor, ultrices ut, elementum vulputate, nunc.</li></ul>"
+export const howItWorks = "<p>ChatVTFK er den samme tjenesten som OpenAI sin ChatGPT men med noen viktige forskjeller.</p><br><p> ChatVTFK bruker et API for å kommunisere med ChatGPT. Det betyr at informasjon om den som bruker tjenesten aldri blir sendt ut fra skolens systemer.</p><br>"+
+"<p>Når man bruker APIet til ChatGPT gjelder det strengere regler for hvordan informasjon som sendes inn i tjenesten behandles enn hvis man bruker den allment tilgjengelige ChatGPT-tjenesten.</p><br>"+
+"<p>De viktigste forskjellene mellom ChatVTFK og den ordinære ChatGPT er at:</p>"+
+"<ul><li>Data som sendes inn brukes ikke til å trene eller forbedre tjenesten.</li><li>Data som sendes inn slettes etter 30 dager.</li>"+
+"<li>Brukerens navn, kontaktinformasjon og andre personopplysninger fra nettleser overføres ikke til OpenAI.</li></ul>"
 
 // Placeholder 2
-export const placeholder2 = "<dl>"+
-"<dt>Definition list</dt>"+
-"<dd>Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna"+
-"aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea"+
-"commodo consequat.</dd>"+
-"<dt>Lorem ipsum dolor sit amet</dt>"+
-"<dd>Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna"+
-"aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea"+
-"commodo consequat.</dd>"+
-"</dl>"
+export const howToUseIt = ""
 
 // Placeholder 3
-export const palceholder3 = "<p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>"
+export const gdpr = "<p>ChatVTFK er utviklet av Vestfold og Telemark fylkeskommune, ved å ta i bruk OpenAI sitt ChatGPT-API og våre egenutviklede nettjenester. Det medfører at vi har kunnet jobbe etter prinsippet om innebygget personvern – å ta de mest personvernvennlige valgene fra starten av utviklingen. Valgene som er tatt skal resultere i en tjeneste med en akseptabel personvernmessig risiko. Formålet med ChatGPT er å tilby en chatbot-tjeneste til bruk i videregående opplæring. Den skal la elever og lærere ta i bruk kunstig intelligens, både for å øke elevens læringsutbytte, men også for å kunne bidra til refleksjon rundt viktig oppstående teknologi i tidlig fase.</p><br>"+
+"<p>Behandlingsaktiviteter</p><br>"+
+"<p>Følgende opplysninger behandles av Vestfold og Telemark fylkeskommune med formål om tilpasset opplæring og individuell vurdering.</p>"+
+"<ul><li>Navn</li><li>Epost</li><li>Fylkes- og skoletilhørighet</li></ul>"+
+"<p>Følgende opplysninger overføres underdatabehandler OpenAI og lagres i 30 dager før sletting:</p>"+
+"<ul><li>Tekst (spørringer) til chatVTFK, samt svarene den gir.</li><li>Personopplysninger i treningsdata og modell</li><li>ChatGPT 3.5 kan inneholde personopplysninger fra trening/utvikling og behandles for å gi den som utfører spørringen et resultat i likhet med et informasjonssøk fra åpne tilgjengelige kilder.</li></ul>"+
+"<p>Dette svarer ChatVTFK: </p>"+
+"<blockquote><p>«En av årsakene til at jeg er personverngodkjent, er på grunn av hvordan jeg har blitt utviklet og designet. Jeg har blitt bygget med personvern i tankene fra starten av, og følger strenge standarder for hvordan jeg håndterer og beskytter data. Jeg krypterer all kommunikasjon mellom deg og meg slik at ingen uautorisert part kan få tilgang til informasjonen din. Jeg samler også inn kun nødvendig informasjon, og all data som jeg samler inn fra deg, blir beskyttet og lagret sikkert i henhold til personvernretningslinjene. Videre, sletter jeg all informasjon som jeg samler inn fra deg når jeg ikke lenger trenger den, for å beskytte dine personopplysninger og personvern. Som en trygg og pålitelig chatbot, tar jeg personvern svært alvorlig, og alle forhold knyttet til det blir godt ivaretatt og beskyttet».</p></blockquote>"
+
+// Tips for students
+export const students = "<p>For å utnytte mulighetene til en AI-chat er det viktig å forstå hvordan det fungerer og kunne litt om hvilke styrker og hvilke svakheter et slikt verktøy har. Bruk derfor litt tid, gjerne sammen med læreren din, for å lære deg å bruke verktøyet på en god måte.</p><br>"+
+"<p>Her er noen tips som kan være nyttige å tenke på når du bruker en AI-chat:</p>"+
+"<ul><li>En AI-chat er ikke en søkemotor. Fakta kan du finne på bedre måter andre steder.</li><li>Vurder alltid responsen og vær kritisk til det som produseres av AI-chaten. Sjekk alltid med andre kilder om svaret stemmer.</li><li><strong>Husk at chatVTFK/chatGPT er trent på datasett som er over ett år gamle.</strong></li><li><strong>For å kunne bruke AI-chat på en nyttig måte, er det nødvendig å ha god fagkunnskap som grunnlag, slik at du kan vurdere det som produseres av svar og forslag.</strong></li></ul>"+
+"<p>En AI-chat er god til å:</p>"+
+"<ul><li>Lage disposisjoner og komme med utkast til tekster og formuleringer</li><li>Hjelpe deg med å komme i gang med kreative prosesser</li><li>Lage oppsummeringer og vise fremgangsmåter</li><li>Hjelpe til med programmeringsoppgaver</li><li>Komme med tips til hvordan du kan komme i gang med ulike problemstillinger</li></ul>"
+
+// Tips for teachers
+export const teachers = "<p>En AI-chat er et verktøy som er velegnet til mange oppgaver, men uegnet til andre. Prøv å sette deg inn i hva en AI-chat er og hvordan den fungerer. Hva er styrkene og hva er svakhetene til et slikt verktøy.</p>"+
+"<ul><li>Utforsk verktøyet sammen med elevene og finn ut hva som er gode bruksområder.</li>"+
+"<li>Be verktøyet om å innta ulike «roller» ved å be den om å svare som om den var en fysikklærer på vgs, eller at man skal ha et svar som er tilpasset et yngre barn.</li>"+
+"<li>Gode inputs med tydelige beskrivelser og mye informasjon gir generelt bedre svar.</li>"+
+"<li>Ikke bruk AI-chatten som en søkemotor, men utnytt heller at den er god til å modellere tekster og finne sammenhenger i datasett.</li>"+
+"<li>Husk at chatVTFK/chatGPT er trent på datasett som er over ett år gamle</li></ul>"
+
+// Reflections
+export const reflections = "<p>Forslag til refleksjonsspørsmål:</p>"+
+"<ul><li>I hvilken grad kan du stole på svarene fra AI-chatten? </li>"+
+"<li>Hvordan lages responsen som AI-chatten? </li>"+
+"<li>Hva skiller svarene fra en vanlig søkemotor som Google fra responsen til en AI-chat? </li>"+
+"<li>Hva kan fornuftig og god bruk av et slikt verktøy være? </li>"+
+"<li>Hvordan kan AI-chat brukes slik at du lærer bedre og er til støtte i skolearbeidet? </li></ul>"
