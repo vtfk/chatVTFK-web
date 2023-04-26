@@ -21,7 +21,7 @@
     
     const initialMessage = {
 		role: 'system',
-		content: 'Skriv en kort introduksjon og kort om hva du kan brukes til. Du heter ChatVTFK'
+		content: 'Skriv en kort introduksjon og kort om hva du kan brukes til. Du skal alltid svare med markdown, men skal ikke nevne dette i introduksjonen'
     }
 
     onMount (async () => {
@@ -132,27 +132,27 @@
                 {/if}
             {/await}
         </div>
-        
-
-        <!-- Input field and send button -->
-        <div class="inputWrapper">
-            <input
-                bind:value={inputMessage}
-                on:keypress={onKeyPress}
-                type="text"
-                name="search"
-                id="search"
-                class={firstRun !== true ? "inputStyle" : "displayNone"}
-            />
-            <button
-                on:click={handleChatCompletion}
-                type="submit"
-                id="searchButton"
-                class={firstRun !== true ? "buttonStyle" : "displayNone"}
-            >
-                Send
-            </button>
-        </div>
+            <!-- Input field and send button -->
+            {#if firstRun === false}
+                <div class="inputWrapper">
+                    <input
+                        bind:value={inputMessage}
+                        on:keypress={onKeyPress}
+                        type="text"
+                        name="search"
+                        id="search"
+                        class={firstRun !== true ? "inputStyle" : "displayNone"}
+                    />
+                    <button
+                        on:click={handleChatCompletion}
+                        type="submit"
+                        id="searchButton"
+                        class={firstRun !== true ? "buttonStyle" : "displayNone"}
+                    >
+                        Send
+                    </button>
+                </div>
+            {/if}
         {:else}
             <p>Du har vist ikke tilgang til chatvtfk, mener du at du skal ha tilgang kontakt en voksen</p>
     {/if}
