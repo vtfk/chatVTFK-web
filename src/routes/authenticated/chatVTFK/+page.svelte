@@ -142,13 +142,13 @@
                 type="text"
                 name="search"
                 id="search"
-                class={firstRun === true ? "displayNone" : "inputStyle"}
+                class={firstRun !== true ? "inputStyle" : "displayNone"}
             />
             <button
                 on:click={handleChatCompletion}
                 type="submit"
                 id="searchButton"
-                class={firstRun === true ? "displayNone" : "buttonStyle"}
+                class={firstRun !== true ? "buttonStyle" : "displayNone"}
             >
                 Send
             </button>
