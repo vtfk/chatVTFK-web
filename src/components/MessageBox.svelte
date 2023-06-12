@@ -1,5 +1,5 @@
 <script>
-    import '../app.css'
+    import '../messageBox.css'
     import { marked } from 'marked'
     import { formatedMessage } from '../lib/services/formatMessage'
 	import IconSpinner from './Icons/IconSpinner.svelte';

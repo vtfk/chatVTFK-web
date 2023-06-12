@@ -1,0 +1,45 @@
+pre {
+    background-color: var(--deepSeaGreen);
+    margin-left: 1rem;
+    padding: 0.5rem;
+    padding-left: 1rem;
+    border-radius: 1rem;
+    color: white;
+}
+
+pre p {
+    background-color: none;
+}
+
+code {
+    background-color: var(--deepSeaGreen);
+    color: white;
+}
+
+p {
+    font-weight: 300;
+    font-size: large;
+}
+
+table {
+    border-collapse: collapse;
+    border: solid 1px #ddd;
+    margin: 0.5rem;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+
+th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: var(--gress-3);
+    color: white;
+}
+
+tr:nth-child(even){background-color: var(--zanah)}
+tr:nth-child(odd){background-color: #f2f2f2;}
