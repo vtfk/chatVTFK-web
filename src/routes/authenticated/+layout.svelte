@@ -6,6 +6,7 @@
     import { accesstokenStore, userRoles, userStore } from '../../lib/services/store';
 	import { get } from 'svelte/store';
 	import TopNav from '../../components/TopNav.svelte';
+    import { api } from '../../../config';
 
     let msalUser
     let msalToken
@@ -16,7 +17,7 @@
     onMount(async () => {
         user = get(userStore)
         // msalToken = sessionStorage.getItem(`${user.homeAccountId}-login.windows.net-accesstoken-${user.idTokenClaims.aud}-${user.tenantId}-openid profile user.read email--`)
-        msalToken = sessionStorage.getItem(`${user.homeAccountId}-login.windows.net-accesstoken-${user.idTokenClaims.aud}-${user.tenantId}-api://c443279c-2806-488f-b032-c9cf7fa52852/user_impersonation--`)
+        msalToken = sessionStorage.getItem(`${user.homeAccountId}-login.windows.net-accesstoken-${user.idTokenClaims.aud}-${user.tenantId}-${api.scope}--`)
         if (msalToken) {
             msalToken = JSON.parse(msalToken)
             accessToken = msalToken?.secret
