@@ -23,7 +23,6 @@
         } else {
             {}
         }
-        
     }
 
     // If user is navigating, check if user have a valid token. If the token is not valid, do something.
@@ -53,6 +52,7 @@
         }
     }
 </script>
+
 {#await loginHandler()}
     <div class="centerSpinner">
         <IconSpinner />

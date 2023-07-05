@@ -105,14 +105,16 @@
         /* align-items: center;  */
         flex-wrap: wrap;
         margin-left: var(--sidenavWidth);
-        width: calc(98vw - var(--sidenavWidth));
+        width: calc(100vw - var(--sidenavWidth));
+        height: 80%;
         padding: 0px 32px;
         overflow:auto;
     }
 
     .content {
         margin-top: 2rem;
-        width: 90%;
+        width: 100%;
+        height: 80%;
         padding: 3rem;
     } 
 
@@ -131,12 +133,14 @@
             width: auto;
             padding: 0px 0px;
             margin-top: 0rem;
+            height: 80%;
         }
 
         .content {
             margin-top: 0rem;
             width: 100%;
             padding: 2rem;
+            height: 80%;
         }
 
         h2 {

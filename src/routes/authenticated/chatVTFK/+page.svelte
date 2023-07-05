@@ -1,24 +1,25 @@
 <script>
     import { onMount } from 'svelte';
-	
-	import Send from '../../../components/Icons/Send.svelte';
 	import InfoBox from '../../../components/InfoBox.svelte';
 	import IconHelp from '../../../components/Icons/IconHelp.svelte';
-    import { tick } from 'svelte';
+    import { tick, afterUpdate } from 'svelte';
 	import MessageBox from '../../../components/MessageBox.svelte';
-	import { userRoles } from '$lib/services/store';
+	import { userRoles, typingStore } from '$lib/services/store';
 	import { get } from 'svelte/store';
 	import { chatCompletion } from '$lib/services/useApi';
-
+    
 	let messages = [] 
 	let inputMessage = '';
 	let isEnterPressed = false
+    let isButtonPressed = false
     let showInfoBox = false
     let element
     let firstRun = false
     let response
     let roles
-    
+    let isMessageLoading = false
+    let assistantMsg = []
+
     const initialMessage = {
 		role: 'system',
 		content: 'Skriv en kort introduksjon og kort om hva du kan brukes til. Du skal alltid svare med markdown, men skal ikke nevne dette i introduksjonen'
@@ -31,15 +32,13 @@
             firstRun = true
         }
     })
-
+    
     const handleChatCompletion = async () => {
-        if(document.getElementById('search') !== null) {
-            document.getElementById('search').disabled = true
-        }
+        isMessageLoading = true
 
-        if(document.getElementById('searchButton') !== null) {
-            document.getElementById('searchButton').disabled = true
-        }
+        if(document.getElementById('search') !== null) document.getElementById('search').disabled = true
+
+        if(document.getElementById('searchButton') !== null) document.getElementById('searchButton').disabled = true
         
 		const userMessage = {
 			role: 'user',
@@ -47,9 +46,7 @@
 		}
 
         // Clear input
-        if(document.getElementById('search') !== null) {
-            document.getElementById('search').value = ''
-        }
+        if(document.getElementById('search') !== null) document.getElementById('search').value = ''
 
         const body = JSON.stringify({
 				isInitializing: messages.length === 0,
@@ -63,25 +60,32 @@
             response = {}
         }
 		
-        if (inputMessage) {
-			messages = messages.concat([userMessage])
-		}
-
+        if (inputMessage) messages = messages.concat([userMessage])
+        
 		messages = messages.concat(response)
+
+        // Tar den siste meldingen fra chatgpt
+        for (const msg of messages) {
+            if(msg.role === 'assistant') {
+                assistantMsg = msg.content
+            }
+        }
+
         // Clean up
 		inputMessage = ''
         isEnterPressed = false
+        isButtonPressed = false
         if(document.getElementById('search') !== null) {
             document.getElementById('search').disabled = false
             document.getElementById('search').focus()
         }
-        if(document.getElementById('search') !== null) {
-            document.getElementById('searchButton').disabled = false
-        }
+
+        if(document.getElementById('search') !== null) document.getElementById('searchButton').disabled = false
+
         await tick()
         scrollToBottom(element)
         firstRun = false
-
+        isMessageLoading = false
 		return response
 	}
 
@@ -94,11 +98,30 @@
         }
     }
 
-    const scrollToBottom = async (node) => {
-        node.scroll({ top: node.scrollHeight * 2, behavior: 'smooth' })
+    const onButtonPress = async () => {
+        isButtonPressed = true
+        await tick()
+        scrollToBottom(element)
+        handleChatCompletion()
     }
 
+    afterUpdate(() => {
+        if(isButtonPressed || isEnterPressed) scrollToBottom(element)
+    })
+
+    const scrollToBottom = async (node) => {
+        node.scroll({ top: node.scrollHeight })
+    }
+
+    $: {
+        if(isMessageLoading === false) {
+            if($typingStore !== 'done' && element !== undefined) {
+                scrollToBottom(element)
+            }  
+        }
+    }
 </script>
+
 <main>
     <!-- Header infobox button and infobox -->
     <div class="pageIntro">
@@ -111,22 +134,32 @@
     {#if roles}
         <div bind:this={element} class="container">
             {#await handleChatCompletion()}
-                <MessageBox role={'assistant'} message={'...'} />
-            {:then}
-                {#if inputMessage.length > 0 && isEnterPressed === true}
+                <div class="msg">
+                    <MessageBox role={'assistant'} message={'...'} lastMessage={'...'} isMsgLoading={isMessageLoading} />
+                </div>
+                {:then}
+                {#if inputMessage.length > 0 && (isEnterPressed === true || isButtonPressed === true)}
                     {#each messages as message}
                         {#if message.role === 'user'}
-                            <MessageBox role={message.role} message={message.content} />
+                            <div class="msg">
+                                <MessageBox role={message.role} message={message.content} />
+                            </div>
                         {:else if message.role === 'assistant'}
-                            <MessageBox role={message.role} message={message.content} />
+                            <div class="msg">
+                                <MessageBox role={message.role} message={message.content} lastMessage={assistantMsg} isMsgLoading={isMessageLoading} />
+                            </div>
                         {/if}
                     {/each}
-                    <MessageBox role={'user'} message={inputMessage} />
-                    <MessageBox role={'assistant'} message={'...'} />
+                    <div class="msg">
+                        <MessageBox role={'user'} message={inputMessage} />
+                        <MessageBox role={'assistant'} message={'...'} />
+                    </div>
                 {:else}
                     {#if isEnterPressed === false}
                         {#each messages as message}
-                            <MessageBox role={message.role} message={message.content} />
+                        <div class="msg">
+                            <MessageBox role={message.role} message={message.content} lastMessage={assistantMsg} isMsgLoading={isMessageLoading} />
+                        </div>
                         {/each}
                     {/if}
                 {/if}
@@ -144,7 +177,7 @@
                         class={firstRun !== true ? "inputStyle" : "displayNone"}
                     />
                     <button
-                        on:click={handleChatCompletion}
+                        on:click={onButtonPress}
                         type="submit"
                         id="searchButton"
                         class={firstRun !== true ? "buttonStyle" : "displayNone"}
@@ -156,7 +189,6 @@
         {:else}
             <p>Du har vist ikke tilgang til chatvtfk, mener du at du skal ha tilgang kontakt en voksen</p>
     {/if}
-    
 </main>
 
 <style>
@@ -168,8 +200,9 @@
         display: flex;
         background-color: var(--gin);
         border-radius: 1rem;
-        min-height: 60vh;
-        max-height: 60vh;
+        height: 72vh;
+        min-height: 72vh;
+        max-height: 72vh;
         min-width: 50vw;
         max-width: 80vw;
         margin: 10px;
@@ -177,6 +210,11 @@
         overflow-y: auto;
         flex-direction:column;
         transform: translateZ(0);
+    }
+
+    .msg {
+        display: flex;
+        flex-direction: column;
     }
 
     .inputWrapper {
@@ -241,6 +279,10 @@
 	}
 
     @media(max-width: 885px) {
+        main {
+           height: 80%;
+        }
+        
         h2 {
             margin-bottom: 0rem; margin-left: 0rem;
         }
@@ -282,8 +324,8 @@
             display: flex;
             background-color: var(--gin);
             border-radius: 1rem;
-            min-height: 60vh;
-            max-height: 60vh;
+            min-height: 45vh;
+            max-height: 80vh;
             min-width: 70vw;
             max-width: 90vw;
             margin: 10px;
