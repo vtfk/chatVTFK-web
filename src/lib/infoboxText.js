@@ -40,3 +40,14 @@ export const reflections = "<p>Forslag til refleksjonsspørsmål:</p>"+
 "<li>Hva skiller svarene fra en vanlig søkemotor som Google fra responsen til en AI-chat? </li>"+
 "<li>Hva kan fornuftig og god bruk av et slikt verktøy være? </li>"+
 "<li>Hvordan kan AI-chat brukes slik at du lærer bedre og er til støtte i skolearbeidet? </li></ul>"
+
+// Generell info
+export const generalInfo =
+"<h3>Hei og velkommen til chatVTFK.</h3>"+
+"<p>Foreløpig fungerer denne tjenesten best på en datamaskin, men den er funksjonell på mobilenheter også.</p>"+
+"<p>Om du trykker på ⚙️ nede til høyre, rett under chatvinduet får du opp noen valg.</p>"+
+"<ul><li>Du kan utvide chatvinduet og ta det tilbake til normalstørrelse ved å bruke bryteren som heter «Utvid chatvindu»</li>"+
+"<li>Du kan også få tilgang til et litt mer avansert spørrefelt som gir deg en bedre oversikt over det du ønsker å spørre om. Du kan blant annet sende inn lister, kode og mye mer. Her er det bare å prøve seg frem. For å få tilgang til dette vinduet bruker du bryteren som heter «Utvid tekstfelt»</li>"+
+"<li>Ved å trykke på ⛔ kan du stoppe meldingen, da vil ikke meldingen bli skrevet ut og den vil bli erstattet med en fallback melding.</li>"+
+"<li>Ved å trykke på ⏭️ vil du fullføre skrivingen og meldingen vil dukke opp med engang.</li>"+
+"<li>Ved å trykke på 🔄️ vil du starte samtalen på nytt, det betyr at språkmodellen ikke lenger har mulighet til å sette ting i kontekst. Det hender at språkmodellene henger seg opp tidligere emner, dette kan påvirke svarene du vil få tilbake. </li></ul>"

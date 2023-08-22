@@ -1,0 +1,10 @@
+.ql-toolbar.ql-snow {
+   border-top-right-radius: 1rem;
+   border-top-left-radius: 1rem;
+}
+
+.content.ql-container.ql-snow {
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+}
+
