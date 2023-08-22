@@ -19,8 +19,8 @@ Dette er en Svelte frontend med Sveltekit.
 |PUBLIC_VITE_WEB_URL|http://localhost:5173|
 
 ## Hosting
-Siden er hostet på vercel, en versjon for test og en for prod.\
-Test versjonen ligger under "preview"\
-Du kan ikke pushe direkte på main branchen, den krever en pull request.\
-Push til "prod-test" for å teste i et live miljø (https://chat-test.vtfk.no/)\
+Siden er hostet på vercel, en versjon for test og en for prod. \
+Test versjonen ligger under "preview" \
+Du kan ikke pushe direkte på main branchen, den krever en pull request. \
+Push til "prod-test" for å teste i et live miljø (https://chat-test.vtfk.no/) \
 Merge en pull request til "main" for å publisere endrigene i prod (https://chat.vtfk.no/).
