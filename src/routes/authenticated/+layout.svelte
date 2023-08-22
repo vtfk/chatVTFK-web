@@ -6,6 +6,7 @@
     import { accesstokenStore, userRoles, userStore } from '../../lib/services/store';
 	import { get } from 'svelte/store';
 	import TopNav from '../../components/TopNav.svelte';
+    import { api } from '../../../config';
 
     let msalUser
     let msalToken
@@ -16,7 +17,7 @@
     onMount(async () => {
         user = get(userStore)
         // msalToken = sessionStorage.getItem(`${user.homeAccountId}-login.windows.net-accesstoken-${user.idTokenClaims.aud}-${user.tenantId}-openid profile user.read email--`)
-        msalToken = sessionStorage.getItem(`${user.homeAccountId}-login.windows.net-accesstoken-${user.idTokenClaims.aud}-${user.tenantId}-api://c443279c-2806-488f-b032-c9cf7fa52852/user_impersonation--`)
+        msalToken = sessionStorage.getItem(`${user.homeAccountId}-login.windows.net-accesstoken-${user.idTokenClaims.aud}-${user.tenantId}-${api.scope}--`)
         if (msalToken) {
             msalToken = JSON.parse(msalToken)
             accessToken = msalToken?.secret
@@ -47,6 +48,17 @@
 
         return await user
     }
+
+    let prevScrollpos = window.scrollY;
+    window.onscroll = function() {
+        const currentScrollPos = window.scrollY;
+        if (prevScrollpos > currentScrollPos) {
+            document.getElementById("navbar").style.top = "0";
+        } else {
+            document.getElementById("navbar").style.top = "-100px";
+        }
+    prevScrollpos = currentScrollPos;
+    }
 </script>
 
 <div>
@@ -58,7 +70,7 @@
         <div class="sideNavWrapper">
             <SideNav roles={roles}/>
         </div>
-        <div class="topNavWrapper">
+        <div id="navbar" class="topNavWrapper">
             <TopNav roles={roles} />
         </div>
         <div class="contentWrapper">
@@ -86,6 +98,7 @@
         left: 0;
         overflow-y:auto;
         overflow-x:hidden;
+        transition: top 0.3s;
     }
 
     .sideNavWrapper {

@@ -12,7 +12,10 @@
     export let lastMessage
     export let isMsgLoading
     export let isTyping = false
-
+    export let isStopped = false
+    export let stoppedMsg = 'Jeg ble stoppet, kanskje jeg var ute på bærtur? 🥴'
+    export let fastforward = false
+    
 
     let messageToBeTyped = ''
     let index = 0
@@ -26,6 +29,18 @@
                 typingStore.set(`${index}`)
                 messageToBeTyped +=lastMessage[index]
                 index += 1
+                if(isStopped) {
+                    typingStore.set('done')
+                    stopTyping()
+                    messageToBeTyped = stoppedMsg
+                    return
+                }
+                if(fastforward) {
+                    typingStore.set('done')
+                    stopTyping()
+                    messageToBeTyped = lastMessage
+                    return
+                }
             } else {
                 typingStore.set('done')
                 stopTyping()
@@ -184,26 +199,22 @@
     }
 
     @keyframes mercuryTypingAnimation {
-    0% {
-        transform: translateY(0px);
-        /* background-color:#6CAD96;  */
-        background-color: grey;
+        0% {
+            transform: translateY(0px);
+            /* background-color:#6CAD96;  */
+            background-color: grey;
+        }
+        28% {
+            transform: translateY(-7px);
+            /* background-color:#9ECAB9; */
+            background-color: azure;
+        }
+        44% {
+            transform: translateY(0px);
+            /* background-color: #B5D9CB; */
+            background-color: rgb(44, 43, 43);
+        }
     }
-    28% {
-        transform: translateY(-7px);
-        /* background-color:#9ECAB9; */
-        background-color: azure;
-    }
-    44% {
-        transform: translateY(0px);
-        /* background-color: #B5D9CB; */
-        background-color: rgb(44, 43, 43);
-    }
-    }
-
-
-
-
     @media(max-width: 885px) {
         .message {
             font-size: 0.9rem;

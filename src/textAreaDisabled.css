@@ -1,0 +1,34 @@
+.ql-toolbar.ql-snow {
+    
+    border-top-right-radius: 1rem;
+    border-top-left-radius: 1rem;
+    background-color: lightgray;
+    cursor: not-allowed;
+}
+ 
+.content.ql-container.ql-snow {
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    background-color: lightgray;
+    cursor: not-allowed;
+}
+
+/* p {
+    all: unset;
+    cursor: not-allowed; 
+}
+
+.ql-formats {
+    all:unset;
+    cursor: not-allowed;
+}
+
+.ql-picker-label {
+    display: none;
+    cursor: not-allowed;
+}
+
+.ql-picker-label::before {
+    display: none;
+    cursor: not-allowed;
+} */
