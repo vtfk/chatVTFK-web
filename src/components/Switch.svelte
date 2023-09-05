@@ -38,7 +38,7 @@
         </button>
     </div>
 {:else if design == 'slider'}
-    <div class={disabled ? 'disabled-slider' : "s s--slider"} style="font-size:{fontSize}px">
+    <div class={disabled ? 'disabled-slider' : "s s--slider"}>
         <span id={`switch-${uniqueID}`}>{label}</span>
         <button
             role="switch"
@@ -52,7 +52,6 @@
         <div role='radiogroup'
             class="group-container"
             aria-labelledby={`label-${uniqueID}`}
-            style="font-size:{fontSize}px" 
             id={`group-${uniqueID}`}>
         <div class='legend' id={`label-${uniqueID}`}>{label}</div>
             {#each options as option}
@@ -130,6 +129,7 @@
     .s--slider {
         display: flex;
         align-items: center;
+        font-size: 16px;
     }
 
     .s--slider button {
@@ -168,6 +168,7 @@
     /* Multi Design Option */
 
     .s--multi .group-container {
+        font-size: 16px;
         border: none;
         padding: 0;
         white-space: nowrap;
@@ -296,5 +297,16 @@
     .disabled-slider button:focus {
         box-shadow: 0 0px 8px red;
         border-radius: 1.5em;
+    }
+
+    @media(orientation: landscape) {
+        @media(min-width: 1366px) {
+            .group-container {
+                font-size: 1.5rem;
+            }
+            .s--slider{
+                font-size: 1.5rem;
+            }   
+        }
     }
 </style>

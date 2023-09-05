@@ -111,4 +111,24 @@
         color: #000000;
         display: block;
     }
+
+    @media(orientation: landscape) {
+        @media(min-width: 1366px) {
+            p {
+                font-size: 1.7rem;
+            }
+            
+            .icon {
+                color: #000000;
+                width: 2rem;
+                height: 2rem;
+                margin: 1rem;
+                margin-bottom: -1rem;
+                margin-left: auto;
+                margin-right: auto;
+                display: block;
+                font-size: 1.5rem;
+            }
+        }
+    }
 </style>

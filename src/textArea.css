@@ -8,3 +8,28 @@
     border-bottom-right-radius: 1rem;
 }
 
+@media(orientation: landscape) {
+    @media(min-width: 1366px) {
+        .ql-editor.ql-blank {
+            font-size: 1.7rem;
+        }
+        .ql-snow .ql-picker.ql-size {
+            width: 120px;
+        }
+        .ql-snow .ql-picker {
+            font-size: 1.1rem;
+        }
+        .ql-snow .ql-picker-label {
+            width: 150px;
+            height: 10px;
+        }
+        .ql-snow .ql-picker:not(.ql-color-picker):not(.ql-icon-picker) svg {
+            width: 30px;
+        } 
+        .ql-snow.ql-toolbar button, .ql-snow .ql-toolbar button {
+            height: 32px;
+            width: 34px;
+        }
+    }
+}
+

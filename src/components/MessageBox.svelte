@@ -165,8 +165,6 @@
         font-size: 1rem;
     }
 
-
-
     .typing {
         display: block;
         overflow:hidden;

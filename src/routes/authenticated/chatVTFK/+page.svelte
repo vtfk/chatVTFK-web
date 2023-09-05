@@ -80,7 +80,7 @@
         if (inputMessage) messages = messages.concat([userMessage])
         
 		messages = messages.concat(response)
-
+        
         // Tar den siste meldingen fra chatgpt
         for (const msg of messages) {
             if(msg.role === 'assistant') {
@@ -244,11 +244,11 @@
                 on:click={isMessageLoading ? console.log('') : handleStopMsg()}
                 >
                 {#if isMessageLoading}
-                    <p style="font-size: 1.5rem;">
+                    <p class='iconStyle'>
                         ⚪
                     </p>
                 {:else}
-                    <p style="font-size: 1.5rem;">
+                    <p class='iconStyle'>
                         ⛔
                     </p>                       
                 {/if}
@@ -259,11 +259,11 @@
                 on:click={isMessageLoading ? console.log('') : handleFastforward()}
             >
                 {#if isMessageLoading}
-                    <p style="font-size: 1.5rem;">
+                    <p class='iconStyle'>
                         🟦
                     </p>
                 {:else}
-                    <p style="font-size: 1.5rem;">
+                    <p class='iconStyle'>
                         ⏭️
                     </p>                       
                 {/if}
@@ -274,11 +274,11 @@
                 on:click={isMessageLoading ? console.log('') : handleChatReset()}
             >
                 {#if isMessageLoading}
-                    <p style="font-size: 1.5rem;">
+                    <p class='iconStyle'>
                         🟦
                     </p>
                 {:else}
-                    <p style="font-size: 1.5rem;">
+                    <p class='iconStyle'>
                         🔄️
                     </p>                       
                 {/if}
@@ -288,7 +288,7 @@
                 style="margin-right: 0.7rem; margin-top: 0.6rem;"
                 on:click={handleSettings}
                 >
-                <p style="font-size: 1.5rem;">
+                <p class='iconStyle'>
                     ⚙️
                 </p>
             </button>
@@ -308,11 +308,11 @@
                     on:click={isMessageLoading ? console.log('') : handleStopMsg()}
                 >
                     {#if isMessageLoading}
-                        <p style="font-size: 1.5rem;">
+                        <p class='iconStyle'>
                             ⚪
                         </p>
                     {:else}
-                        <p style="font-size: 1.5rem;">
+                        <p class='iconStyle'>
                             ⛔
                         </p>                    
                     {/if}
@@ -323,11 +323,11 @@
                     on:click={isMessageLoading ? console.log('') : handleFastforward()}
                 >
                     {#if isMessageLoading}
-                        <p style="font-size: 1.5rem;">
+                        <p class='iconStyle'>
                             🟦
                         </p>
                     {:else}
-                        <p style="font-size: 1.5rem;">
+                        <p class='iconStyle'>
                             ⏭️
                         </p>                       
                     {/if}
@@ -338,11 +338,11 @@
                     on:click={isMessageLoading ? console.log('') : handleChatReset()}
                 >
                     {#if isMessageLoading}
-                        <p style="font-size: 1.5rem;">
+                        <p class='iconStyle'>
                             🟦
                         </p>
                     {:else}
-                        <p style="font-size: 1.5rem;">
+                        <p class='iconStyle'>
                             🔄️
                         </p>                       
                     {/if}
@@ -351,7 +351,7 @@
                     class="settingsBtn"
                     on:click={handleSettings}
                     >
-                    <p style="font-size: 1.5rem;">
+                    <p class='iconStyle'>
                         ⚙️
                     </p>
                 </button>
@@ -553,6 +553,10 @@
         cursor: pointer;
     }
 
+    .iconStyle {
+        font-size: 1.5rem;
+    }
+
     @media(max-width: 885px) {
         main {
            height: 80%;
@@ -644,6 +648,29 @@
         .expandedContainer {
             margin-top: 0rem;
             top: -10rem
+        }
+    }
+
+    @media(orientation: landscape) {
+        .expandedContainer {
+            height: 75vh;
+            min-height: 70vh;
+            max-height: 85vh;
+            min-width: 50vw;
+            max-width: 100vw;
+        }
+        @media(min-width: 1366px) {
+            p {
+                font-size: 2rem;
+                line-height: 1em;
+                padding: 0.5rem;
+            }
+            .buttonStyle{
+                font-size: 1.7rem;
+            }
+            .iconStyle {
+                font-size: 1.7rem;
+            }   
         }
     }
 </style>

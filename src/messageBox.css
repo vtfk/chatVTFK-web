@@ -21,7 +21,7 @@ code {
 
 p {
     font-weight: 300;
-    font-size: large;
+    font-size: 1.2rem;
 }
 
 table {
@@ -46,3 +46,13 @@ th {
 
 tr:nth-child(even){background-color: var(--zanah)}
 tr:nth-child(odd){background-color: #f2f2f2;}
+
+@media(orientation: landscape) {
+    @media(min-width: 1366px) {
+        p {
+            font-size: 2rem;
+            line-height: 1em;
+            padding: 0.5rem;
+        }   
+    }
+}
