@@ -299,14 +299,28 @@
         border-radius: 1.5em;
     }
 
-    @media(orientation: landscape) {
-        @media(min-width: 1366px) {
-            .group-container {
-                font-size: 1.5rem;
-            }
-            .s--slider{
-                font-size: 1.5rem;
-            }   
+    @media all and (device-width: 768px) and (device-height: 1024px) and (orientation:portrait) {
+        .group-container {
+            font-size: 1rem;
+        }
+        .s--slider{
+            font-size: 1rem;
+        }
+    }
+    @media all and (device-width: 1024px) and (device-height: 768px) and (orientation:landscape) {
+        .group-container {
+            font-size: 1rem;
+        }
+        .s--slider{
+            font-size: 1rem;
+        }
+    }
+    @media all and (device-width: 1366px) and (device-height: 1024px) and (orientation:landscape) {
+        .group-container {
+            font-size: 1.5rem;
+        }
+        .s--slider{
+            font-size: 1.5rem;
         }
     }
 </style>

@@ -644,6 +644,46 @@
         }
     }
 
+    @media all and (device-width: 768px) and (device-height: 1024px) and (orientation:portrait) {
+        p {
+            font-size: 2rem;
+            line-height: 1em;
+            padding: 0.5rem;
+        }
+        .buttonStyle{
+            font-size: 1.7rem;
+        }
+        .iconStyle {
+            font-size: 1.7rem;
+        }
+    }
+    @media all and (device-width: 1024px) and (device-height: 768px) and (orientation:landscape) {
+        p {
+            font-size: 2rem;
+            line-height: 1em;
+            padding: 0.5rem;
+        }
+        .buttonStyle{
+            font-size: 1.7rem;
+        }
+        .iconStyle {
+            font-size: 1.7rem;
+        }
+    }
+    @media all and (device-width: 1366px) and (device-height: 1024px) and (orientation:landscape) {
+        p {
+            font-size: 2rem;
+            line-height: 1em;
+            padding: 0.5rem;
+        }
+        .buttonStyle{
+            font-size: 1.7rem;
+        }
+        .iconStyle {
+            font-size: 1.7rem;
+        }
+    }
+
     @media(max-width: 481) { 
         .expandedContainer {
             margin-top: 0rem;
@@ -658,19 +698,6 @@
             max-height: 85vh;
             min-width: 50vw;
             max-width: 100vw;
-        }
-        @media(min-width: 1366px) {
-            p {
-                font-size: 2rem;
-                line-height: 1em;
-                padding: 0.5rem;
-            }
-            .buttonStyle{
-                font-size: 1.7rem;
-            }
-            .iconStyle {
-                font-size: 1.7rem;
-            }   
         }
     }
 </style>

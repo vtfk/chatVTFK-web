@@ -115,7 +115,7 @@
     @media(orientation: landscape) {
         @media(min-width: 1366px) {
             p {
-                font-size: 1.7rem;
+                font-size: 1rem;
             }
             
             .icon {
