@@ -1,38 +1,26 @@
-# create-svelte
+# ChatVTFK
+Dette er en Svelte frontend med Sveltekit.
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+## Hvordan begynne å utvikle og kjøre prosjektet lokalt 
+1. Klon ned repoet.
+2. Installer avhengigheter ved å kjøre kommandoen "npm i" i terminalen.
+3. Lag en lokal .env fil som vist under.
+4. Start prosjektet ved å kjøre "npm run dev" i terminalen.
 
-## Creating a project
+## .ENV
 
-If you're seeing this, you've probably already done this step. Congrats!
+|KEY|VALUE|
+|:---:|:---:|
+|PUBLIC_VITE_CLIENT_ISS|https://login.microsoftonline.com/|
+|PUBLIC_VITE_CLIENT_ID|XXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXX|
+|PUBLIC_VITE_REDIRECT_URI|http://localhost:5173/authenticated|
+|PUBLIC_VITE_API_URL|http://localhost:7071/api|
+|PUBLIC_VITE_API_SCOPE|api://XXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXX/user_impersonation|
+|PUBLIC_VITE_WEB_URL|http://localhost:5173|
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
-
-# create a new project in my-app
-npm create svelte@latest my-app
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+## Hosting
+Siden er hostet på vercel, en versjon for test og en for prod. \
+Test versjonen ligger under "preview" \
+Du kan ikke pushe direkte på main branchen, den krever en pull request. \
+Push til "prod-test" for å teste i et live miljø (https://chat-test.vtfk.no/) \
+Merge en pull request til "main" for å publisere endrigene i prod (https://chat.vtfk.no/).

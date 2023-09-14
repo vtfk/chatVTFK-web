@@ -21,7 +21,7 @@ code {
 
 p {
     font-weight: 300;
-    font-size: large;
+    font-size: 1.2rem;
 }
 
 table {
@@ -46,3 +46,25 @@ th {
 
 tr:nth-child(even){background-color: var(--zanah)}
 tr:nth-child(odd){background-color: #f2f2f2;}
+
+@media all and (device-width: 768px) and (device-height: 1024px) and (orientation:portrait) {
+    p {
+        font-size: 1rem;
+        line-height: 1em;
+        padding: 0.5rem;
+    }
+}
+@media all and (device-width: 1024px) and (device-height: 768px) and (orientation:landscape) {
+    p {
+        font-size: 1rem;
+        line-height: 1em;
+        padding: 0.5rem;
+    }
+}
+@media all and (device-width: 1366px) and (device-height: 1024px) and (orientation:landscape) {
+    p {
+        font-size: 1.7rem;
+        line-height: 1em;
+        padding: 0.5rem;
+    }
+}
