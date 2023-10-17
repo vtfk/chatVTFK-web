@@ -366,6 +366,7 @@
                         on:keypress={onKeyPress}
                         type="text"
                         name="search"
+                        autocomplete="off"
                         id="search"
                         class={firstRun !== true ? "inputStyle" : "displayNone"}
                     />
