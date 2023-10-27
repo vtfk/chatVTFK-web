@@ -129,14 +129,23 @@
     })
 
     const scrollToBottom = async (node) => {
-        node.scroll({ top: node.scrollHeight })
+        if(fastforward === false) {
+            node.scroll({ top: node.scrollHeight })
+        } else {
+            typingStore.set('done')
+        }
+        if(stopMsg === false) {
+            node.scroll({ top: node.scrollHeight })
+        } else {
+            typingStore.set('done')
+        }
     }
 
     $: {
         if(isMessageLoading === false) {
             if($typingStore !== 'done' && element !== undefined) {
                 scrollToBottom(element)
-            }  
+            }
         }
 
         inputMessage[inputMessage?.length - 1]
@@ -238,7 +247,7 @@
             {/await}
         </div>
         <div class="settings">
-            <button 
+            <!-- <button 
                 class={settingsOpen ? "displayNone" : "btns"}
                 style="margin-right: 0.7rem; margin-top: 0.6rem;"
                 on:click={isMessageLoading ? console.log('') : handleStopMsg()}
@@ -252,8 +261,8 @@
                         ⛔
                     </p>                       
                 {/if}
-            </button>
-            <button 
+            </button> -->
+            <!-- <button 
                 class={settingsOpen ? "displayNone" : "btns"}
                 style="margin-right: 0.7rem; margin-top: 0.6rem;"
                 on:click={isMessageLoading ? console.log('') : handleFastforward()}
@@ -267,7 +276,7 @@
                         ⏭️
                     </p>                       
                 {/if}
-            </button>
+            </button> -->
             <button 
                 class={settingsOpen ? "displayNone" : "btns"}
                 style="margin-right: 0.7rem;"
@@ -302,7 +311,7 @@
                 <Switch bind:value={switchExpandValue} label="Utvid chatvindu" design="slider" disabled={false}/>
         {/if}
             <div>
-                <button 
+                <!-- <button 
                     class="btns"
                     style="margin-right: 0.7rem;"
                     on:click={isMessageLoading ? console.log('') : handleStopMsg()}
@@ -316,8 +325,8 @@
                             ⛔
                         </p>                    
                     {/if}
-                </button>
-                <button 
+                </button> -->
+                <!-- <button 
                     class="btns"
                     style="margin-right: 0.7rem;"
                     on:click={isMessageLoading ? console.log('') : handleFastforward()}
@@ -331,7 +340,7 @@
                             ⏭️
                         </p>                       
                     {/if}
-                </button>
+                </button> -->
                 <button 
                     class="btns"
                     style="margin-right: 0.7rem;"

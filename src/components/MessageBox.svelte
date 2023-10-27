@@ -23,33 +23,41 @@
     let oldLastMessage
 
     const typeMessage = () => {
-        oldLastMessage = lastMessage
-        if(lastMessage !== '...') {
-            if (index < lastMessage?.length) {
-                typingStore.set(`${index}`)
-                messageToBeTyped +=lastMessage[index]
-                index += 1
-                if(isStopped) {
-                    typingStore.set('done')
-                    stopTyping()
-                    messageToBeTyped = stoppedMsg
-                    return
-                }
-                if(fastforward) {
-                    typingStore.set('done')
-                    stopTyping()
-                    messageToBeTyped = lastMessage
-                    return
-                }
-            } else {
-                typingStore.set('done')
-                stopTyping()
-                return
-            }
-        }
+        /*
+            Typewriter effekten funger ikke som den skal, det gjør at brukeren ikke får scrollet i chat vinudet
+            Den er deaktivert til vi har tid til å finner ut av dette. 
+            Fjern kommentaren der "typewriter" står bak.
+        */ 
+        
+        // oldLastMessage = lastMessage //typewriter
+        messageToBeTyped = lastMessage
+        // if(lastMessage !== '...') { //typewriter gjelder hele if'en
+        //     if (index < lastMessage?.length) {
+        //         typingStore.set(`${index}`)
+        //         messageToBeTyped +=lastMessage[index]
+        //         index += 1
+        //         if(isStopped) {
+        //             typingStore.set('done')
+        //             stopTyping()
+        //             messageToBeTyped = stoppedMsg
+        //             return
+        //         }
+        //         if(fastforward) {
+        //             typingStore.set('done')
+        //             stopTyping()
+        //             messageToBeTyped = lastMessage
+        //             return
+        //         }
+        //     } else {
+        //         typingStore.set('done')
+        //         stopTyping()
+        //         return
+        //     }
+        // }
     }
     const typing = () => {
-        typewriter = setInterval(typeMessage, 25)
+        // typewriter = setInterval(typeMessage, 25) //typewriter
+        typeMessage()
     }
 	
 	const stopTyping = () => {
@@ -58,7 +66,9 @@
 	}
 
     if(lastMessage !== '...') {
-        typing()
+        if(isStopped === false || fastforward === false) {
+            typing()
+        }
     }
     // True or false if its the user or the assistant(chatgpt)
 	const name = role === 'assistant'   
