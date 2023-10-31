@@ -4,6 +4,7 @@
 	import { userRoles, typingStore } from '$lib/services/store';
 	import { get } from 'svelte/store';
 	import { chatCompletion } from '$lib/services/useApi';
+    import { isWithinTokenLimit } from 'gpt-tokenizer'
 
     // Components
     import InfoBox from '../../../components/InfoBox.svelte';
@@ -14,7 +15,7 @@
 	import { generalInfo } from '$lib/infoboxText';
 
 	let messages = [] 
-	let inputMessage = '';
+	let inputMessage = ''
 	let isEnterPressed = false
     let isButtonPressed = false
     let showInfoBox = false
@@ -31,6 +32,8 @@
     let isDisabled = false
     let stopMsg
     let fastforward
+    let advInputToken = ''
+    let currentTokensUsed = 0
     let stoppedMsg = 'Jeg ble stoppet 🥴 Du kan fortsette å skrive som normalt, prøv å være mer spesifikk med spørringen din om du ønsker et bedre og mer presist svar 👍 '
 
     const initialMessage = {
@@ -109,11 +112,13 @@
 	}
 
     const onKeyPress = async e => {
-        if (e.charCode === 13) {
-            isEnterPressed = true
-            await tick()
-            scrollToBottom(element)
-            handleChatCompletion()
+        if (currentTokensUsed < 4000){
+            if (e.charCode === 13) {
+                isEnterPressed = true
+                await tick()
+                scrollToBottom(element)
+                handleChatCompletion()
+            }
         }
     }
 
@@ -160,12 +165,56 @@
         if(switchExpandValue === 'on') {
             showInfoBox = false
         }
-        // Handle expanded chatwindow and 
+        // Handle expanded chatwindow and input type
         if(switchInputValue === 'on' && width < 462) {
             switchInputValue = 'off'
         }
         if(switchExpandValue === 'on' && width < 462) {
             switchExpandValue = 'off'
+        }
+
+        if(switchInputValue === 'on') {
+            // Clear input field by id when switching to advinput
+            if(document.getElementById('search')?.value) {
+                document.getElementById('search').value = ''
+            }
+        } 
+
+        let inputWithInLimit
+        const isInputWithInLimit = (input, limit) => {
+            const tokenLimit = limit
+            const withInLimit = isWithinTokenLimit(input, tokenLimit)
+
+            if(withInLimit !== false) {
+                return withInLimit
+            } else {
+                return {
+                    withInLimit: withInLimit, 
+                    token: limit
+                }
+            }
+        }
+
+        if(switchInputValue === 'off') {
+            inputWithInLimit = isInputWithInLimit(inputMessage, 4000)
+        } else if(switchInputValue === 'on') {
+            inputWithInLimit = isInputWithInLimit(advInputToken, 4000)
+        }
+
+        let chatWithInLimit
+        if(messages.length > 1) {
+            chatWithInLimit = isWithinTokenLimit(JSON.stringify(messages), 4000)
+        }
+        // 4000 tokens maks på chat og input obs obs.
+        if(chatWithInLimit === undefined) chatWithInLimit = 0
+        if(chatWithInLimit === false) chatWithInLimit = 4000
+        if(inputWithInLimit === false) inputWithInLimit = 4000
+        if(inputWithInLimit?.withInLimit === false) inputWithInLimit = 4000
+        currentTokensUsed =+ chatWithInLimit + inputWithInLimit
+        if(isNaN(currentTokensUsed)) currentTokensUsed =+ 0
+        
+        if(currentTokensUsed === 4000) {
+            window.alert('Beklager, men du har overskredet grensen for antall tokens som kan brukes 😓 \n\nTokens er en måte å måle og begrense tekstmengden som kan behandles per spørring. \n\nFor å kunne fortsette samtalen, vennligst reduser antall tokens du bruker i spørringen din. Eller start samtalen på nytt ved å trykke på 🔄️')
         }
     }
 
@@ -247,70 +296,78 @@
             {/await}
         </div>
         <div class="settings">
-            <!-- <button 
-                class={settingsOpen ? "displayNone" : "btns"}
-                style="margin-right: 0.7rem; margin-top: 0.6rem;"
-                on:click={isMessageLoading ? console.log('') : handleStopMsg()}
+            <div class={settingsOpen ? "displayNone" : "tokenCounter"} style="margin-right: 0.7rem;">
+                {currentTokensUsed}/4000
+            </div>
+            <div class="btnsDiv">
+                <!-- <button 
+                    class={settingsOpen ? "displayNone" : "btns"}
+                    style="margin-right: 0.7rem; margin-top: 0.6rem;"
+                    on:click={isMessageLoading ? console.log('') : handleStopMsg()}
+                    >
+                    {#if isMessageLoading}
+                        <p class='iconStyle'>
+                            ⚪
+                        </p>
+                    {:else}
+                        <p class='iconStyle'>
+                            ⛔
+                        </p>                       
+                    {/if}
+                </button> -->
+                <!-- <button 
+                    class={settingsOpen ? "displayNone" : "btns"}
+                    style="margin-right: 0.7rem; margin-top: 0.6rem;"
+                    on:click={isMessageLoading ? console.log('') : handleFastforward()}
                 >
-                {#if isMessageLoading}
-                    <p class='iconStyle'>
-                        ⚪
-                    </p>
-                {:else}
-                    <p class='iconStyle'>
-                        ⛔
-                    </p>                       
-                {/if}
-            </button> -->
-            <!-- <button 
-                class={settingsOpen ? "displayNone" : "btns"}
-                style="margin-right: 0.7rem; margin-top: 0.6rem;"
-                on:click={isMessageLoading ? console.log('') : handleFastforward()}
-            >
-                {#if isMessageLoading}
-                    <p class='iconStyle'>
-                        🟦
-                    </p>
-                {:else}
-                    <p class='iconStyle'>
-                        ⏭️
-                    </p>                       
-                {/if}
-            </button> -->
-            <button 
-                class={settingsOpen ? "displayNone" : "btns"}
-                style="margin-right: 0.7rem;"
-                on:click={isMessageLoading ? console.log('') : handleChatReset()}
-            >
-                {#if isMessageLoading}
-                    <p class='iconStyle'>
-                        🟦
-                    </p>
-                {:else}
-                    <p class='iconStyle'>
-                        🔄️
-                    </p>                       
-                {/if}
-            </button>
-            <button 
-                class={settingsOpen ? "displayNone" : "settingsBtn"}
-                style="margin-right: 0.7rem; margin-top: 0.6rem;"
-                on:click={handleSettings}
+                    {#if isMessageLoading}
+                        <p class='iconStyle'>
+                            🟦
+                        </p>
+                    {:else}
+                        <p class='iconStyle'>
+                            ⏭️
+                        </p>                       
+                    {/if}
+                </button> -->
+                <button 
+                    class={settingsOpen ? "displayNone" : "btns"}
+                    style="margin-right: 0.7rem;"
+                    on:click={isMessageLoading ? console.log('') : handleChatReset()}
                 >
-                <p class='iconStyle'>
-                    ⚙️
-                </p>
-            </button>
+                    {#if isMessageLoading}
+                        <p class='iconStyle'>
+                            🟦
+                        </p>
+                    {:else}
+                        <p class='iconStyle'>
+                            🔄️
+                        </p>                       
+                    {/if}
+                </button>
+                <button 
+                    class={settingsOpen ? "displayNone" : "settingsBtn"}
+                    style="margin-right: 0.7rem; margin-top: 0.6rem;"
+                    on:click={handleSettings}
+                    >
+                    <p class='iconStyle'>
+                        ⚙️
+                    </p>
+                </button>
+            </div>
         </div>
         <div class={settingsOpen ? "settingsMenu" : "displayNone"}>
+            <div class="tokenCounter" style="margin-right: 0.7rem;">
+                {currentTokensUsed}/4000
+            </div>
             {#if width <= 462}
                 <Switch value={'off'} label="Utvid tekstfelt" design="slider" disabled={true}/>
                 <Switch value={'off'} label="Utvid chatvindu" design="slider" disabled={true}/>
             {:else}
                 <Switch bind:value={switchInputValue} label="Utvid tekstfelt" design="slider" disabled={false}/>
                 <Switch bind:value={switchExpandValue} label="Utvid chatvindu" design="slider" disabled={false}/>
-        {/if}
-            <div>
+            {/if}
+            <div class="btnsDiv">
                 <!-- <button 
                     class="btns"
                     style="margin-right: 0.7rem;"
@@ -379,29 +436,53 @@
                         id="search"
                         class={firstRun !== true ? "inputStyle" : "displayNone"}
                     />
-                    <button
-                        on:click={onButtonPress}
-                        type="submit"
-                        id="searchButton"
-                        class={firstRun !== true > 0 ? "buttonStyle" : "displayNone"}
-                    >
-                        Send
-                    </button>
+                    {#if currentTokensUsed < 4000}
+                        <button
+                            on:click={onButtonPress}
+                            type="submit"
+                            id="searchButton"
+                            class={firstRun !== true ? "buttonStyle" : "displayNone"}
+                        >
+                            Send
+                        </button>
+                    {:else}
+                        <button
+                            on:click={onButtonPress}
+                            type="submit"
+                            id="searchButton"
+                            class="buttonStyle"
+                            disabled
+                        >
+                            Send
+                        </button>
+                    {/if}
                 </div>
                 <div class={switchInputValue === 'on' && width > 462 ? "advInput" : "displayNone"}>
                     <div id="advInput">
                         {#key isDisabled}
-                            <AdvancedInput bind:advInput={inputMessage} disabled={isDisabled} basic={!isDisabled} />
+                            <AdvancedInput bind:advInput={inputMessage} bind:currentAdvInput={advInputToken} disabled={isDisabled} basic={!isDisabled} clearAdvInput={switchInputValue} tokensUsed={currentTokensUsed}/>
                         {/key}
                     </div>
-                    <button
-                        on:click={getAdvInput}
-                        type="submit"
-                        id="searchButtonAdv"
-                        class={firstRun !== true ? "buttonStyle" : "displayNone"}
-                    >
-                        Send
-                    </button>
+                    {#if currentTokensUsed < 4000}
+                        <button
+                            on:click={getAdvInput}
+                            type="submit"
+                            id="searchButtonAdv"
+                            class={firstRun !== true ? "buttonStyle" : "displayNone"}
+                        >
+                            Send
+                        </button>
+                    {:else}
+                        <button
+                            on:click={getAdvInput}
+                            type="submit"
+                            id="searchButtonAdv"
+                            class="buttonStyle"
+                            disabled
+                        >
+                            Send
+                        </button>
+                    {/if}
                 </div>
             </div>
         {/if}
@@ -502,6 +583,11 @@
         background-color: var(--mork);
         cursor: not-allowed;
     }
+
+    .btnDisabled {
+        background-color: var(--mork);
+        cursor: not-allowed;
+    }
     
     .pageIntro {
 		margin-bottom: 36px;
@@ -533,9 +619,14 @@
     }
 
     .settings {
-        float: right;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        padding: 0.5rem;
         margin-top: -0.5rem;
         margin-bottom: -0.5rem;
+        margin-left: 0.5rem;
+        margin-right: 0.5rem;
     }
 
     .settingsBtn {
@@ -550,17 +641,37 @@
 
     .settingsMenu {
         display: flex;
+        flex-wrap: wrap;
         justify-content: space-between;
         background-color: var(--siv-2);
         border-radius: 1rem;
-        padding: 0.7rem;
-        margin-bottom: -0.8rem;
+        padding-left: 0.5rem;
+        padding-right: 1.2rem;
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
         margin-top: -0.5rem;
+        margin-bottom: -0.5rem;
+        margin-left: 0.5rem;
+        margin-right: 0.5rem;
     }
 
     .btns {
         all: unset;
         cursor: pointer;
+    }
+
+    .btnsDiv {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-end;
+        flex-wrap: wrap;
+    }
+
+    .tokenCounter {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-end;
+        flex-wrap: wrap;
     }
 
     .iconStyle {
@@ -647,7 +758,9 @@
         .settingsMenu {
             display: flex;
             flex-wrap: wrap;
-            justify-content: space-between;
+            flex-direction: column;
+            align-content: space-around;
+            align-items: center;
             background-color: var(--siv-2);
             border-radius: 1rem;
             padding: 0.7rem;
