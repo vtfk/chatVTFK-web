@@ -1,20 +1,70 @@
 <script>
     import Quill from "quill";
+	import { onMount } from "svelte";
     // import '../textAreaDisabled.css';
     // import '../textArea.css';
 
     export let basic = false
     export let full = false
     export let disabled = false
+    export let clearAdvInput = 'on'
     export let placeholder = 'Spør meg om noe... (Trykk "ctrl/cmd(mac) + enter" for å sende en melding eller trykk på "Send")'
     export let advInput
+    export let currentAdvInput
+    export let tokensUsed
 
     const disabledPlaceholder = 'Venter på svar...'
 
     let toolbar
+    let disableEnter = false
+    let bindings
 
     $: {
         disabled
+        if(clearAdvInput === 'off') {
+            if(document.getElementsByClassName('ql-editor')[0]?.innerHTML !== undefined && document.getElementsByClassName('ql-editor')[0]?.innerText !== undefined) {
+                document.getElementsByClassName('ql-editor')[0].innerHTML = "\n"
+                document.getElementsByClassName('ql-editor')[0].innerText = "\n"
+            }
+        }
+        if(tokensUsed === 4000) {
+            disableEnter = true
+        } else if (tokensUsed < 4000) {
+            disableEnter = false
+        }
+
+        // Custom keybindings for qilljs textarea, only active when the textarea is active. 
+        if(disableEnter === false) {
+            bindings = {
+                custom: {
+                    key: 'Enter',
+                    shortKey : true,
+                    handler: function(range, context) {
+                        const advInputObj = {
+                            inputType: 'advInput',
+                            msg: document.getElementsByClassName('ql-editor')[0].innerHTML,
+                        }
+                        advInput = advInputObj
+                        document.getElementsByClassName('ql-editor')[0].innerHTML = "\n"
+                        document.getElementsByClassName('ql-editor')[0].innerText = "\n"
+                    }
+                },
+                list: {
+                    key: 'backspace',
+                    format: ['list'],
+                    handler: function(range, context) {
+                    if (context.offset === 0) {
+                        // When backspace on the first character of a list,
+                        // remove the list instead
+                        this.quill.format('list', false, Quill.sources.USER);
+                    } else {
+                        // Otherwise propogate to Quill's default
+                        return true;
+                    }
+                    }
+                }
+            }
+        } 
     }
 
     // qulljs options
@@ -51,40 +101,8 @@
         toolbar = []
     }
 
-    // Custom keybindings for qilljs textarea, only active when the textarea is active. 
-    const bindings = {
-        custom: {
-            key: 'Enter',
-            shortKey : true,
-            handler: function(range, context) {
-                const advInputObj = {
-                    inputType: 'advInput',
-                    msg: document.getElementsByClassName('ql-editor')[0].innerHTML,
-                }
-                advInput = advInputObj
-                document.getElementsByClassName('ql-editor')[0].innerHTML = "\n"
-                document.getElementsByClassName('ql-editor')[0].innerText = "\n"
-            }
-        },
-        list: {
-            key: 'backspace',
-            format: ['list'],
-            handler: function(range, context) {
-            if (context.offset === 0) {
-                // When backspace on the first character of a list,
-                // remove the list instead
-                this.quill.format('list', false, Quill.sources.USER);
-            } else {
-                // Otherwise propogate to Quill's default
-                return true;
-            }
-            }
-        }
-    }
-
-    // Initiate quill
 	const quill = (node) => {
-		new Quill(node, {
+		const quill = new Quill(node, {
             modules: {
                 toolbar: toolbar,
                 keyboard: {
@@ -95,8 +113,14 @@
             theme: "snow",
             readOnly: disabled ? true : false
         })
+
+        quill.on('text-change', function(delta, oldDelta, source) {
+            currentAdvInput = quill.container.innerText
+        })
     }
 
+    
+    
     // const disabledStyle = {
     //     toolbar: `
     //         border-top-right-radius: 1rem;
