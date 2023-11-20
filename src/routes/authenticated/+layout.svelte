@@ -13,6 +13,7 @@
     let user
     let accessToken
     let roles
+    let isUserBlocked = false
 
     onMount(async () => {
         user = get(userStore)
@@ -37,6 +38,9 @@
             msalUser = JSON.parse(msalUser)
         } else {
             msalUser = {}
+        }
+        if(get(userRoles).includes('chatVTFK.block')) {
+            isUserBlocked = true
         }
     })
 
@@ -76,7 +80,12 @@
         <div class="contentWrapper">
             <div class="content">
                 <h2> Hei, {msalUser.name} 🤓</h2>
-                <slot></slot>
+                {#if !isUserBlocked}
+                    <slot></slot>
+                {:else}
+                    <p>Av ulike grunner er brukeren din blokkert. Mener du at dette er feil kontakt servicedesk 🧑‍💻</p>
+                {/if}
+                
             </div>
         </div>
     {/await}
@@ -134,6 +143,17 @@
     h2 {
         margin-bottom: 1rem; 
         margin-left: 0.5rem;
+    }
+
+    p {
+        font-size: larger;
+        font-style: normal;
+        font-weight: bold;
+        padding: 1rem;
+        display: flex;
+        justify-content: center;
+        margin-left: 5rem;
+        margin-right: 5rem;
     }
 
     @media(max-width: 885px) {
